@@ -86,38 +86,39 @@
             </div>
         </div>
 
-        <!-- New Announcement page -->
-        <div data-role="page" id="addAnnoun">
+        <!-- Edit Announcement page -->
+        <div data-role="page" id="editAnnoun">
             <div data-role="header" class="header">
                 <a href="#startPage" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
-                <h1 id="newAnnHed">Nowe ogłoszenie</h1>
+                <h1 id="editAnnHed">Edycja ogłoszenia</h1>
             </div>
           
             <div data-role="main" class="ui-content">
                 <div>
                     Tagi
-                    <input type="text" placeholder="np. matematyka, programowanie" id="tagsNewAnn"/>
+                    <input type="text" placeholder="np. matematyka, programowanie" id="tagsEditAnn" readonly/>
                     <hr>
                     Data
-                    <input type="date" placeholder="01-01-2018" id="dateNewAnn"/>
+                    <input type="date" placeholder="01-01-2018" id="dateEditAnn" readonly/>
                     <hr>
                     Godzina ropoczęcia
-                    <input type="time" placeholder="9:35" id="startTimeNewAnn"/>
+                    <input type="time" placeholder="9:35" id="startTimeEditAnn" readonly/>
                     <hr>
                     Godzina zakończenia
-                    <input type="time" placeholder="11:35" id="endTimeNewAnn"/>
+                    <input type="time" placeholder="11:35" id="endTimeEditAnn" readonly/>
                     <hr>
                     Miejsce
-                    <input type="text" placeholder="np. Paw. A, piętro 2" id="placeNewAnn"/>
+                    <input type="text" placeholder="np. Paw. A, piętro 2" id="placeEditAnn"/>
                     <hr>
                     Krótki opis (max. 150 znaków)
-                    <textarea name="descNewAnn" maxlength="150" rows="6" placeholder="Opisz krótko cel spotkania"></textarea> 
+                    <textarea name="descEditAnn" maxlength="150" rows="6" placeholder="Opisz krótko cel spotkania"></textarea> 
                     <hr>
                 </div>
             </div>
-            <div data-role="footer" data-position="fixed" id="footerNewAnn">
-                <button class="ui-btn ui-corner-all" id="cancBtnNewAnn">Anuluj</button> 
-                <button class="ui-btn ui-corner-all" id="addBtnNewAnn">Dodaj</button>               
+            <div data-role="footer" data-position="fixed" id="footerEditAnn">
+                <button class="ui-btn" id="deleteBtnEditAnn">Odwołaj</button> 
+                <button class="ui-btn" id="cancBtnEditAnn">Anuluj</button> 
+                <button class="ui-btn" id="saveBtnEditAnn">Zapisz zmiany</button>               
             </div>
         </div>
     </body>
