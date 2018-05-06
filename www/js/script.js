@@ -82,13 +82,16 @@ $(document).ready(function(){
 
 	//EVENT LISTENER DO REJESTRACJI
 	btnRegis.addEventListener('click', function() {
-		const nickReg = document.getElementById('nickreg').value;
+		var nickReg = document.getElementById('nickreg').value;
 		const emailRegInput = document.getElementById('emailreg');
 		const emailReg = emailRegInput.value;
 		const passwdReg1Input = document.getElementById('hasloreg');
 		const passwdReg1 = passwdReg1Input.value;
 		const passwdReg2Input = document.getElementById('haslopowtreg');
 		const passwdReg2 = passwdReg2Input.value;
+		if (nickReg == null || nickReg == "") {
+		    nickReg = emailReg.substring(0, emailReg.indexOf('@'));
+        }
 		var info = document.getElementById('regInfo');
 		info.style.color = "red";
 		if (passwdReg1 === passwdReg2) {
