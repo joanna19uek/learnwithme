@@ -219,12 +219,13 @@ body {
     margin-right: 15px;
 }
 
-#imgDetails {
+#btnDetails {
     position: absolute;
     float: right;
-    right: 10%;
-    bottom: 10%;
-    width: 30%;
+    right: 20px;
+    bottom: 20px;
+    width: 45%;
+
 }
 
 #myDetailsFooter {
@@ -361,4 +362,10 @@ body {
 .annKey {
     display: none;
 
+}
+
+#detailBackWat {
+    position: relative;
+    left: 0px;
+    
 }

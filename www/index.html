@@ -225,20 +225,26 @@
         <!-- Announcement details page -->
         <div data-role="page" id="AnnDetailsPage">
             <div data-role="header" class="header">
-                <a href="#startPage" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
+                <!--
+                <a href="#mainAll" id="detailBack" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
+                -->
+                <button  id="detailBackAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getAllAnn()"></button>
+                <button  id="detailBackWat" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getMyWatched()"></button>
                 <h1>Ogłoszenie</h1>
                 <h2 id="usersAnnDetails">Ogłoszenie użytkownika X</h2>
+                <span class="annKey" id="annKeyDetail"></span>
             </div>
           
             <div data-role="main">
                 <div id="infosDetails">
-                    Data: <span id="dateDetails">12.04</span><br>
-                    Godziny: <span id="startTimeDetails">9:35</span> - <span id="endTimeDetails">11:45</span><br>
-                    Miejsce: <span id="placeDetails">Paw. A, piętro 2</span><br>
-                    Opis: <span id="descDetails">Krótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opis</span><br>
-                    Tagi: <span id="tagsDetails">matematyka</span>
+                    <p>Data: <span id="dateDetails"></span></p>
+                    <p>Godziny: <span id="startTimeDetails"></span> - <span id="endTimeDetails"></span></p>
+                    <p>Miejsce: <span id="placeDetails"></span></p>
+                    <p>Opis: <span id="descDetails"></span></p>
+                    <p>Tagi: <span id="tagsDetails"></span></p>
+                    <p >Obserwatorzy: <span id="followersNumb"></span></p>
                 </div>
-                <img src="img/128greybook.png" id="imgDetails"/>
+                <button id="btnDetails" onclick="toogleWatch()"><img src="img/128greybook.png" id="imgDetails"></button>
             </div>
         </div>
 

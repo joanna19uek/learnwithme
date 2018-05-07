@@ -81,7 +81,7 @@ $(document).ready(function(){
 	});
 
 	//EVENT LISTENER DO REJESTRACJI
-	btnRegis.addEventListener('click', function() {
+	btnRegis.addEventListener('click', function() {		
 		var nickReg = document.getElementById('nickreg').value;
 		const emailRegInput = document.getElementById('emailreg');
 		const emailReg = emailRegInput.value;
@@ -91,7 +91,7 @@ $(document).ready(function(){
 		const passwdReg2 = passwdReg2Input.value;
 		if (nickReg == null || nickReg == "") {
 		    nickReg = emailReg.substring(0, emailReg.indexOf('@'));
-        }
+	    }
 		var info = document.getElementById('regInfo');
 		info.style.color = "red";
 		if (passwdReg1 === passwdReg2) {
@@ -164,9 +164,9 @@ var someDiv = document.getElementById('someDiv');
   dbRef.on('value', snap => someDiv.innerText = snap.val());
 */
 function addUserToDB(email, nick, userKey){
-	var emails = email.replace('.', ',');
+	//var emails = email.replace('.', ',');
 	var userData = {
-		email: emails,
+		email: email,
 		name: nick,
 		watched: [],
 		added: []
