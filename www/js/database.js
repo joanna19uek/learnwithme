@@ -226,6 +226,39 @@ function showThisAnnoun(key, back){
 	});
 }
 
+function showMyAnnoun(key, back){
+	switch(back){
+		case '#mainAll':
+			$('#myDetailBackAll').show();
+			$('#myDetailBackMy').hide();
+			break;
+		case '#mainWatched':
+			$('#myDetailBackMy').show();
+			$('#myDetailBackAll').hide();
+			break;
+	}
+	var myAnnKey = key;
+	var myId = firebase.auth().currentUser.uid;
+	goToSite('MyAnnDetailsPage');	
+	//$('#detailBack').attr('href', back);
+	$('#myAnnKeyDetail').text(myAnnKey);
+	var myWatchKey = [];
+	database.child('classifieds/' + myAnnKey).once("value").then(function(snapshot) {
+		//console.log(snapshot.val());
+		var myAnnKey = snapshot.val();
+		database.child('users/' + myAnnKey.author).once("value").then(function(snapshot) {$('#usersAnnMyDetails').text('Ogłoszenie użytkownika ' + snapshot.val().name);});
+		$('#dateMyDetails').text(myAnnKey.date);				
+		$('#startTimeMyDetails').text(myAnnKey.startTime);
+		$('#endTimeMyDetails').text(myAnnKey.endTime);
+		$('#placeMyDetails').text(myAnnKey.place);
+		$('#descMyDetails').text(myAnnKey.description);
+		$('#tagsMyDetails').text(myAnnKey.tags);
+		$('#myFollowersNumb').text(myAnnKey.followersNumb);
+		//database.child('users/' + usId + "/watched/" + key).on('value', function(snap) { myAnn = snap.val(); });				
+	});
+}
+
+
 function toogleWatch(){
 	var newKey = $('#annKeyDetail').text();
 	var myWatched;

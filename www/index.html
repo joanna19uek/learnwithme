@@ -251,18 +251,21 @@
         <!-- My announcement details page -->
         <div data-role="page" id="MyAnnDetailsPage">
             <div data-role="header" class="header">
-                <a href="#startPage" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
+                <button  id="myDetailBackAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getAllAnn()"></button>
+                <button  id="myDetailBackMy" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getMyAnn()"></button>
                 <h1>Ogłoszenie</h1>
                 <h2 id="usersAnnMyDetails">Ogłoszenie użytkownika X</h2>
+                <span class="annKey" id="myAnnKeyDetail"></span>
             </div>
           
             <div data-role="main">
                 <div id="infosMyDetails">
-                    Data: <span id="dateMyDetails">12.04</span><br>
-                    Godziny: <span id="startTimeMyDetails">9:35</span> - <span id="endTimeMyDetails">11:45</span><br>
-                    Miejsce: <span id="placeMyDetails">Paw. A, piętro 2</span><br>
-                    Opis: <span id="descMyDetails">Krótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opis</span><br>
-                    Tagi: <span id="tagsMyDetails">matematyka</span>
+                   <p>Data: <span id="dateMyDetails"></span><br></p>
+                   <p>Godziny: <span id="startTimeMyDetails"></span> - <span id="endTimeMyDetails"></span><br></p>
+                   <p>Miejsce: <span id="placeMyDetails"></span><br></p>
+                    <p>Opis: <span id="descMyDetails"></span><br></p>
+                    <p>Tagi: <span id="tagsMyDetails"></span></p>
+                    <p>Obserwatorzy: <span id="myFollowersNumb"></span></p>
                 </div>
             </div>
 
