@@ -232,7 +232,7 @@ function showMyAnnoun(key, back){
 			$('#myDetailBackAll').show();
 			$('#myDetailBackMy').hide();
 			break;
-		case '#mainWatched':
+		case '#mainAdd':
 			$('#myDetailBackMy').show();
 			$('#myDetailBackAll').hide();
 			break;

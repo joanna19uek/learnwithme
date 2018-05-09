@@ -364,7 +364,7 @@ body {
 
 }
 
-#detailBackWat {
+#detailBackWat, #myDetailBackMy, #myDetailBackAll {
     position: relative;
     left: 0px;
     
