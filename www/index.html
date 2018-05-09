@@ -100,7 +100,7 @@
             </div>
           
             <div data-role="main" class="ui-content">
-                
+
             </div>
 
             <div data-role="footer" data-position="fixed" id="footmain">
@@ -121,7 +121,7 @@
             </div>
           
             <div data-role="main" class="ui-content">
-                
+
             </div>
 
             <div data-role="footer" data-position="fixed" id="footmainAd">
@@ -142,7 +142,7 @@
             </div>
           
             <div data-role="main" class="ui-content">
-                
+
             </div>
 
             <div data-role="footer" data-position="fixed" id="footmainWat">
@@ -181,15 +181,15 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="footerNewAnn">
-                <button class="ui-btn" id="cancBtnNewAnn" onclick="goToSite('mainAll')">Anuluj</button> 
-                <button class="ui-btn" id="addBtnNewAnn" onclick="addAnnoun()">Dodaj</button> 
+                <button class="ui-btn" id="cancBtnNewAnn" onclick="goToSite('mainAll')">Anuluj</button>
+                <button class="ui-btn" id="addBtnNewAnn" onclick="addAnnoun()">Dodaj</button>
             </div>
         </div>
 
         <!-- Edit Announcement page -->
         <div data-role="page" id="editAnnoun">
             <div data-role="header" class="header">
-                <a href="#startPage" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
+                <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
                 <h1 id="editAnnHed">Edycja ogłoszenia</h1>
             </div>
           
@@ -217,8 +217,8 @@
             </div>
             <div data-role="footer" data-position="fixed" id="footerEditAnn">
                 <button class="ui-btn" id="deleteBtnEditAnn">Odwołaj</button> 
-                <button class="ui-btn" id="cancBtnEditAnn" onclick="goToSite('MyAnnDetailsPage')">Anuluj</button> 
-                <button class="ui-btn" id="saveBtnEditAnn">Zapisz zmiany</button>               
+                <button class="ui-btn" id="cancBtnEditAnn" onclick="goToSite('MyAnnDetailsPage')">Anuluj</button>
+                <button class="ui-btn" id="saveBtnEditAnn">Zapisz zmiany</button>
             </div>
         </div>
         
@@ -251,7 +251,7 @@
         <!-- My announcement details page -->
         <div data-role="page" id="MyAnnDetailsPage">
             <div data-role="header" class="header">
-                <a href="#startPage" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
+                <a href="#mainAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
                 <h1>Ogłoszenie</h1>
                 <h2 id="usersAnnMyDetails">Ogłoszenie użytkownika X</h2>
             </div>
@@ -267,15 +267,15 @@
             </div>
 
             <div data-role="footer" data-position="fixed" id="myDetailsFooter">
-                <button class="ui-btn" id="odwolaj">Odwołaj</button>  
-                <button class="ui-btn" id="edytuj">Edytuj</button>                
+                <button class="ui-btn" id="odwolaj" onclick="">Odwołaj</button>
+                <button class="ui-btn" id="edytuj" onclick="goToSite('editAnnoun')">Edytuj</button>
             </div>
         </div>
       
         <!-- Page about autors -->
         <div data-role="page" id="authors">
             <div data-role="header" class="header">
-                <a href="#startPage" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
+                <a href="#mainAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
                 <h1>Autorzy</h1>
             </div>
           
@@ -305,7 +305,24 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="kontaktFooter">
-                <button class="ui-btn ui-corner-all" id="kontaktBtn">Kontakt</button>                
+                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="">Kontakt</button>
+            </div>
+        </div>
+
+        <!-- Profile settings page -->
+        <div data-role="page" id="profileSettingsPage">
+            <div data-role="header" class="header">
+                <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
+                <h1>Ustawienia profilu</h1>
+            </div>
+
+            <div data-role="main" class="ui-content">
+                Poniżej możesz wpisać nowy nick
+                    <input type="text" placeholder="Nick" id="nickprof"/>
+            </div>
+
+            <div data-role="footer" data-position="fixed" id="footerEditProfile">
+                <button class="ui-btn ui-corner-all" id="saveChangesEditProfile" onclick="goToSite('mainAll')">Zapisz zmiany</button>
             </div>
         </div>
     </body>

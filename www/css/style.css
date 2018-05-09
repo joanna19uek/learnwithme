@@ -162,7 +162,7 @@ body {
     width: 60px !important;
     border-radius: 50px !important;
     border: 0 !important;
-    color: #ffffff !important;    
+    color: #ffffff !important;
     padding: 0px;
     font-size: 40px !important;
 }
@@ -225,7 +225,6 @@ body {
     right: 20px;
     bottom: 20px;
     width: 45%;
-
 }
 
 #myDetailsFooter {
@@ -291,7 +290,7 @@ body {
     background-color: #00A6FF;
 }
 
-#footerNewAnn {
+#footerNewAnn, #footerEditProfile {
     background-color: transparent!important;
 }
 
@@ -367,5 +366,14 @@ body {
 #detailBackWat {
     position: relative;
     left: 0px;
-    
+
+}
+
+#saveChangesEditProfile {
+    width: 90%;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    color: #ffffff;
+    background-color: #00A6FF;
 }
