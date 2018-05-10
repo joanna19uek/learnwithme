@@ -51,8 +51,6 @@ var addAnnoun = function() {
 			followersNumb: 0,
 			followsBy: {}
 		};
-		
-		
 
 		var newKey = firebase.database().ref().child('classifieds').push().key;
 		console.log(newKey);
@@ -258,6 +256,12 @@ function showMyAnnoun(key, back){
 	});
 }
 
+/*function changeStatus(key){
+
+	var newKey = $('#myAnnKeyDetail').text();
+	database.child('/classifieds/' + newKey).update(active: false);
+	goToSite('mainAdd');
+}*/
 
 function toogleWatch(){
 	var newKey = $('#annKeyDetail').text();
