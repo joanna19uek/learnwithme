@@ -64,7 +64,7 @@
             </div>
 
             <div data-role="footer" data-position="fixed">
-                <button class="ui-btn ui-corner-all" id="zarejestruj">Zarejestruj</button>                
+                <button class="ui-btn ui-corner-all" id="zarejestruj" onclick="goToSite('afterRegPage')">Zarejestruj</button>                
             </div>
         </div>
 		
@@ -90,12 +90,28 @@
         <!-- Main page - all -->
         <div data-role="page" id="mainAll">
             <div data-role="header" class="header">
-                <a href="" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn"></a>
+                <a href="#sideMenu" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn" data-role="button" role="button"></a>
                 <h1 id="mainAllHeader">LearnWithMe</h1>
                 <div data-role="controlgroup" id="controlBtns" class="btn-group">
                   <button class="ui-btn" id="all" >Ogłoszenia</button>
                   <button class="ui-btn" id="added" onclick="getMyAnn()">Dodane</button>
                   <button class="ui-btn" id="watched" onclick="getMyWatched()">Obserwowane</button>
+                </div>
+            </div>
+
+            <div data-role="panel" id="sideMenu" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
+                <div class="ui-panel-inner">
+                    <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
+                    <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
+                    <ul style="list-style: none; transform: translateX(-40px);">
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
+                        <hr />
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                    </ul>
+                    <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
           
@@ -111,7 +127,7 @@
         <!-- Main page - added -->
         <div data-role="page" id="mainAdd">
             <div data-role="header" class="header">
-                <a href="" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn"></a>
+                <a href="#sideMenu1" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn" data-role="button" role="button"></a>
                 <h1 id="mainAddHeader">LearnWithMe</h1>
                 <div data-role="controlgroup" id="controlBtnsAd" class="btn-group">
                   <button class="ui-btn" id="allAd" onclick="getAllAnn()">Ogłoszenia</button>
@@ -119,7 +135,23 @@
                   <button class="ui-btn" id="watchedAd" onclick="getMyWatched()">Obserwowane</button>
                 </div>
             </div>
-          
+
+            <div data-role="panel" id="sideMenu1" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
+                <div class="ui-panel-inner">
+                    <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
+                    <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
+                    <ul style="list-style: none; transform: translateX(-40px);">
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
+                        <hr />
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                    </ul>
+                    <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
+                </div>
+            </div>
+
             <div data-role="main" class="ui-content">
 
             </div>
@@ -132,7 +164,7 @@
         <!-- Main page - watched -->
         <div data-role="page" id="mainWatched">
             <div data-role="header" class="header">
-                <a href="" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn"></a>
+                <a href="#sideMenu2" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn" data-role="button" role="button"></a>
                 <h1 id="mainWatchHeader">LearnWithMe</h1>
                 <div data-role="controlgroup" id="controlBtnsWat" class="btn-group">
                   <button class="ui-btn" id="allWat" onclick="getAllAnn()">Ogłoszenia</button>
@@ -140,7 +172,23 @@
                   <button class="ui-btn" id="watchedWat">Obserwowane</button>
                 </div>
             </div>
-          
+
+            <div data-role="panel" id="sideMenu2" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
+                <div class="ui-panel-inner">
+                    <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
+                    <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
+                    <ul style="list-style: none; transform: translateX(-40px);">
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
+                        <hr />
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                    </ul>
+                    <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
+                </div>
+            </div>
+
             <div data-role="main" class="ui-content">
 
             </div>
@@ -216,14 +264,14 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="footerEditAnn">
-                <button class="ui-btn" id="deleteBtnEditAnn">Odwołaj</button> 
+                <button class="ui-btn" id="deleteBtnEditAnn">Odwołaj</button>
                 <button class="ui-btn" id="cancBtnEditAnn" onclick="goToSite('MyAnnDetailsPage')">Anuluj</button>
                 <button class="ui-btn" id="saveBtnEditAnn">Zapisz zmiany</button>
             </div>
         </div>
         
         <!-- Announcement details page -->
-        <div data-role="page" id="AnnDetailsPage">
+        <div data-role="page" id="annDetailsPage">
             <div data-role="header" class="header">
                 <!--
                 <a href="#mainAll" id="detailBack" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
@@ -249,7 +297,7 @@
         </div>
 
         <!-- My announcement details page -->
-        <div data-role="page" id="MyAnnDetailsPage">
+        <div data-role="page" id="myAnnDetailsPage">
             <div data-role="header" class="header">
                 <a href="#mainAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
                 <h1>Ogłoszenie</h1>
