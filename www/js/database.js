@@ -262,3 +262,14 @@ function toogleWatch(){
 		}		
 	});
 }
+
+function getProfile() {
+	var userId = firebase.auth().currentUser.uid;
+	var email = $('#currentEmail');
+	var currentNick = $('#currentNick');
+	database.child('users/' + userId).once("value").then(function(snapshot) {
+		email.html(snapshot.email);
+		currentNick.html(snapshot.name);
+	});
+	goToSite('profileSettingsPage');
+}
