@@ -439,3 +439,7 @@ body {
     position: absolute;
     left: 20px;
 }
+
+.ident {
+    margin-left: 30px;
+}

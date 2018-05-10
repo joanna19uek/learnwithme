@@ -265,11 +265,17 @@ function toogleWatch(){
 
 function getProfile() {
 	var userId = firebase.auth().currentUser.uid;
-	var email = $('#currentEmail');
-	var currentNick = $('#currentNick');
 	database.child('users/' + userId).once("value").then(function(snapshot) {
-		email.html(snapshot.email);
-		currentNick.html(snapshot.name);
+	    var user = snapshot.val();
+        $('#currentEmail').text(user.email);
+        $('#currentNick').text(user.name);
 	});
 	goToSite('profileSettingsPage');
+}
+
+function saveProfile() {
+    var userId = firebase.auth().currentUser.uid;
+    var newNick = $('#nickprof').val();
+    database.child('users/' + userId).update({name: newNick});
+    getAllAnn();
 }

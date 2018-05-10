@@ -108,7 +108,7 @@
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
                     </ul>
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
@@ -145,7 +145,7 @@
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
                     </ul>
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
@@ -182,7 +182,7 @@
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
                     </ul>
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
@@ -367,15 +367,16 @@
             <div data-role="main" class="ui-content">
                 <br>
                 Adres e-mail:
-                <p id="currentEmail">e-mail</p>
+                <p id="currentEmail" class="ident"></p>
                 Obecny nick:
-                <p id="currentNick">nick</p>
+                <p id="currentNick" class="ident"></p>
+                <br>
                 Zmień nick:
                 <input type="text" placeholder="Nick" id="nickprof"/>
             </div>
 
             <div data-role="footer" data-position="fixed" id="footerEditProfile">
-                <button class="ui-btn ui-corner-all" id="saveChangesEditProfile" onclick="goToSite('mainAll')">Zapisz zmiany</button>
+                <button class="ui-btn ui-corner-all" id="saveChangesEditProfile" onclick="saveProfile()">Zapisz zmiany</button>
             </div>
         </div>
     </body>
