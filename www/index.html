@@ -90,7 +90,7 @@
         <!-- Main page - all -->
         <div data-role="page" id="mainAll">
             <div data-role="header" class="header">
-                <a href="" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn"></a>
+                <a href="#sideMenu" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn"></a>
                 <h1 id="mainAllHeader">LearnWithMe</h1>
                 <div data-role="controlgroup" id="controlBtns" class="btn-group">
                   <button class="ui-btn" id="all" >Ogłoszenia</button>
@@ -98,7 +98,23 @@
                   <button class="ui-btn" id="watched" onclick="getMyWatched()">Obserwowane</button>
                 </div>
             </div>
-          
+            
+             <div data-role="panel" id="sideMenu" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
+                <div class="ui-panel-inner">
+                    <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
+                    <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
+                    <ul style="list-style: none; transform: translateX(-40px);">
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
+                        <hr />
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                    </ul>
+                    <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
+                </div>
+            </div>
+
             <div data-role="main" class="ui-content"></div>
 
             <div data-role="footer" data-position="fixed" id="footmain">
@@ -301,6 +317,17 @@
             <div data-role="footer" data-position="fixed" id="kontaktFooter">
                 <button class="ui-btn ui-corner-all" id="kontaktBtn">Kontakt</button>                
             </div>
+        </div>
+
+        <!-- Notification page -->
+        <div data-role="page" id="notice">
+            <div data-role="header" class="header">
+                <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
+                <h1>Powiadomienia</h1>
+            </div>
+          
+            <div data-role="main" class="ui-content"></div>
+            
         </div>
     </body>
 </html>

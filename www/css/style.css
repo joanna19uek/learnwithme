@@ -370,10 +370,48 @@ body {
     
 }
 
-#comAll, #comAdd, #comWatched {
+#comAll, #comAdd, #comWatched, #comNotice {
     width: 92%;
     position: absolute;
     top: 150px;
     text-align: center;
     color: #ffffff;
+}
+
+#notice {
+    background-color: #D3D9E0;
+}
+
+.noticeContainer {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.noticeHead {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 0;
+    margin-left: 3px
+}
+
+.noticeText {
+    margin-bottom: 0;
+    font-size: 12px;
+    position: absolute;
+    left: 3px;
+    right: 3px;
+}
+
+.deletebutt {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    margin-top: 0;
+    border: none!important;
+    padding: none!important;
+    background-color: #000000!important;
 }
