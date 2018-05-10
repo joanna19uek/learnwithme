@@ -49,7 +49,8 @@ var addAnnoun = function() {
 			active: true,
 			author: userID,
 			followersNumb: 0,
-			followsBy: {}
+			followsBy: {},
+			notifications: {}
 		};
 		
 		
@@ -99,7 +100,7 @@ function getAllAnn() {
 		
 		//database.child('users/' + firebase.auth().currentUser.uid + "/added/" + data.key).once('value', function(snap) { myAnn = snap.val(); console.log(myAnn); });
 		for(iter in newAnn){
-			console.log(iter);
+			//console.log(iter);
 			
 			var announInfo = "";
 			if(usId == newAnn[iter].author){
@@ -247,7 +248,7 @@ function showThisAnnoun(key, back){
 
 function toogleWatch(){
 	var newKey = $('#annKeyDetail').text();
-	var myWatched;
+	var myWatch;
 	var usId = firebase.auth().currentUser.uid;
 	var follNum = $('#followersNumb');
 	database.child('users/' + usId + "/watched/" + newKey).once("value").then(function(snapshot) {
@@ -280,4 +281,9 @@ function toogleWatch(){
 			$('#imgDetails').attr('src', 'img/128greybook.png');
 		}		
 	});
+}
+
+function getNotifications(){
+	var usId = firebase.auth().currentUser.uid;
+	
 }
