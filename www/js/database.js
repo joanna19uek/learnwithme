@@ -191,7 +191,7 @@ function getAllAnn() {
 			}
 		}
 	});	
-	goToSite('mainAll');	
+	goToSite('mainAll');
 }
 
 function checkAnnMoment(coll){
@@ -374,8 +374,6 @@ function toogleWatch(){
 			toast(ms,600);
 		}		
 	});
-	
-
 }
 
 function showMyAnnoun(key, back){

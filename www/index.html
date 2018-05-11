@@ -71,8 +71,8 @@
                 <button class="ui-btn ui-corner-all" id="zarejestruj" onclick="goToSite('afterRegPage')">Zarejestruj</button>                
             </div>
         </div>
-        
-        <!-- After registration page -->
+      
+		<!-- After registration page -->
         <div data-role="page" id="afterRegPage">
             <div data-role="header" class="header">
                 <h1 id="finrejhead">Finalizacja rejestracji</h1>
@@ -80,14 +80,13 @@
           
             <div data-role="main" class="ui-content">
                 <div id="aftRegCom">
-                    <h2>Sukces!</h2>
-                    <p>Gratulacje!<br>
-                        Twoje konto zostało poprawnie utworzone.<br>
-                        Możesz przejść do serwisu klikając w poniższy przycisk.
-                    </p>
+                  <h2>Sukces!</h2>
+                  <p>Gratulacje!<br>
+                    Twoje konto zostało poprawnie utworzone.<br>
+                    Możesz przejść do serwisu klikając w poniższy przycisk.
+                  </p>
                 </div>
                 <img src="img/downarr.png" id="downArrow"/>
-
                 <button class="ui-btn ui-corner-all" id="przejdzDoSerwisu" onclick="getAllAnn()">Przejdź do serwisu</button>
             </div>
         </div>
@@ -380,12 +379,12 @@
         <!-- Notification page -->
         <div data-role="page" id="notice">
             <div data-role="header" class="header">
-                <button class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></button>
+                <button class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt" onclick-="getAllAnn()"></button>
                 <h1>Powiadomienia</h1>
             </div>          
             <div data-role="main" class="ui-content">
             </div>
-            <div data-role="footer">               
+            <div data-role="footer">  
             </div>
         </div>
 
