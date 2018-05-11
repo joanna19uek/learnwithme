@@ -299,3 +299,23 @@ function toogleWatch(){
 		}		
 	});
 }
+function getAnn(){
+	var newKey = $('#myAnnKeyDetail').text();
+	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
+		var ann = snapshot.val();
+		$('#tagsEditAnn').text(ann.tags);
+		$('#dateEditAnn').text(ann.date);
+		$('#startTimeEditAnn').text(ann.startTime);
+		$('#endTimeEditAnn').text(ann.endTime);
+		$('#placeEditAnn').text(ann.place);
+		$('#descEditAnn').text(ann.description);
+		console.log(snapshot);
+		console.log(snapshot.val());
+	});
+
+	goToSite('editAnnoun');
+}
+
+//function saveAnn(){
+
+//}
