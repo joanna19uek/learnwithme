@@ -311,7 +311,8 @@ function getAnn(){
 		$('#placeEditAnn').val(ann.place);
 		$('#descEditAnn').val(ann.description);
 		//console.log(snapshot);
-		//console.log(snapshot.val());
+		console.log(snapshot.val());
+		$("ann.date").datapicker({dateFormat: "dd-mm-rrrr"});
 	});
 
 	goToSite('editAnnoun');
