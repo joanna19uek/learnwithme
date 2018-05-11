@@ -81,7 +81,9 @@ var addAnnoun = function() {
 		
 		var shortData = newKey;
 		database.child('/classifieds/' + newKey).set(announData);		
-		database.child('/users/' + userID + '/added/' + shortData).set(shortData);		
+		database.child('/users/' + userID + '/added/' + shortData).set(shortData);
+        var ms = 'Dodano ogłoszenie.';
+        toast(ms,600);
 		getMyAnn();
 		tagi.text("");
 		dateAnn.text("");
@@ -100,8 +102,6 @@ var addAnnoun = function() {
 		validateInfo.html("Upewnij się czy wprowadzona <strong>data</strong> jest co najmniej dniem dzisiejszym, a godzina <strong>rozpoczęścia</strong> <br>jest wcześniejszą niż <strong>zakończenia</strong> oraz czy już nie <strong>minęła.</strong>")
 		scrollTo(validateInfo);
 	}
-	var ms = 'Dodano ogłoszenie.';
-	toast(ms,600);
 };
 function validateTime(sTime, eTime){	
 	sTime = sTime.split(":");
