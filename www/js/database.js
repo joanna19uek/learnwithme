@@ -518,19 +518,19 @@ function setNofification(receiver, reason, announ, author){
 	switch(reason){
 		case 'cancel':
 			title = 'Odwołano spotkanie';
-			content = 'Ogłoszenie ' + announ.tags + ' użytkownika ' + author + ' zostało odwołane';
+			content = '' + author + ' z dnia ' + announ.date + ' zostało odwołane.';
 			break;
 		case 'addToWatch':
 			title = 'Dodano obserwację';
-			content = 'Ogłoszenie ' + announ.tags + ' jest obserwowane przez ' + author;
+			content = 'Ogłoszenie z dnia ' + announ.date + ' jest obserwowane przez ' + author + '.';
 			break;
 		case 'removeFromWatch':
 			title = 'Zaprzestano obserwacji';
-			content = author + ' przeształ obserwować ogłoszenie ' + announ.tags;
+			content = author + ' przestał obserwować ogłoszenie z dnia ' + announ.date + '.';
 			break;
 		case 'changeAnnoun':
 			title = 'Zmieniono szczegóły';
-			content = author + ' zmienił szczegóły ogłoszenia: ' + announ.tags;
+			content = author + ' zmienił szczegóły ogłoszenia z dnia ' + announ.date + '.';
 			break;
 		default:
 			title: '';
