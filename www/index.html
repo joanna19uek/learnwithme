@@ -88,6 +88,7 @@
                 </div>
                 <img src="img/downarr.png" id="downArrow"/>
                 <button class="ui-btn ui-corner-all" id="przejdzDoSerwisu" onclick="getAllAnn()">Przejdź do serwisu</button>
+
             </div>
         </div>
 
@@ -102,7 +103,7 @@
                   <button class="ui-btn" id="watched" onclick="getMyWatched()">Obserwowane</button>
                 </div>  
             </div>
-                    
+
             <div data-role="panel" id="sideMenu" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
                 <div class="ui-panel-inner">
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
@@ -118,10 +119,9 @@
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
-
+          
             <div data-role="main" class="ui-content">
             </div>
-
             <div data-role="footer" data-position="fixed" id="footmain">
                 <button class="dodajBtn" onclick="addNewAnn()">+</button> 
           </div>
@@ -153,9 +153,7 @@
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
-          
             <div data-role="main" class="ui-content"></div>
-
             <div data-role="footer" data-position="fixed" id="footmainAd">
                 <button class="dodajBtn" onclick="addNewAnn()">+</button> 
             </div>
@@ -188,9 +186,8 @@
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
-          
-            <div data-role="main" class="ui-content"></div>
 
+            <div data-role="main" class="ui-content"></div>
             <div data-role="footer" data-position="fixed" id="footmainWat">
                 <button class="dodajBtn" onclick="addNewAnn()">+</button>
             </div>
@@ -350,7 +347,7 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="kontaktFooter">
-                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="sendMail()">Kontakt</button>                
+                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="sendMail()">Kontakt</button>     
             </div>
         </div>
 
@@ -360,22 +357,23 @@
                 <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
                 <h1>Ustawienia profilu</h1>
             </div>
-          
+
             <div data-role="main" class="ui-content">
                 <br>
-                Adres e-mail: 
-                <p id="currentEmail">e-mail</p>
+                Adres e-mail:
+                <p id="currentEmail" class="ident"></p>
                 Obecny nick:
-                <p id="currentNick">nick</p>
+                <p id="currentNick" class="ident"></p>
+                <br>
                 Zmień nick:
-                    <input type="text" placeholder="Nick" id="nickprof"/>
+                <input type="text" placeholder="Nick" id="nickprof"/>
             </div>
 
             <div data-role="footer" data-position="fixed" id="footerEditProfile">
-                <button class="ui-btn ui-corner-all" id="saveChangesEditProfile" onclick="goToSite('mainAll')">Zapisz zmiany</button>                
+                <button class="ui-btn ui-corner-all" id="saveChangesEditProfile" onclick="saveProfile()">Zapisz zmiany</button>
             </div>
         </div>
-      
+
         <!-- Notification page -->
         <div data-role="page" id="notice">
             <div data-role="header" class="header">
@@ -405,5 +403,6 @@
             <div data-role="footer" data-position="fixed">        
             </div>
         </div>
+
     </body>
 </html>

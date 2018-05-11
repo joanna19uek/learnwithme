@@ -17,6 +17,7 @@ var addAnnoun = function() {
 	var endTime = $('#endTimeNewAnn');
 	var placeAnn = $('#placeNewAnn');
 	var description = $('#descriptionAnn');
+
 	tagi.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
@@ -35,6 +36,7 @@ var addAnnoun = function() {
 	description.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
+
 	var dateAdd = formatDate(new Date());
 
 	var tagiS = tagi.val();
@@ -47,13 +49,15 @@ var addAnnoun = function() {
 	var userID = firebase.auth().currentUser.uid;
 
 	var validateInfo = $('#newAnnInfo').css("color", "red");
-	//console.log(validateTime(startTimeS, endTimeS));
-		//console.log(validateDate(new Date(dateAnn.val()), startTimeS));
+
 	if (tagiS.length == 0 || dateAnnS.length == 0 ||
 		startTimeS.length == 0 || endTimeS.length == 0 || 
 		placeAnnS.length == 0 || descriptionS.length == 0) {
 		console.log("Nie wszystkie pola są wypełnione!");
 		validateInfo.text("Proszę uzupełnić puste pola!");
+
+	} else {
+
 		scrollTo(validateInfo);
 		tagi.css("border", "solid 1px red");
 		dateAnn.css("border", "solid 1px red");
@@ -83,6 +87,7 @@ var addAnnoun = function() {
 		database.child('/classifieds/' + newKey).set(announData);		
 		database.child('/users/' + userID + '/added/' + shortData).set(shortData);		
 		getMyAnn();
+
 		tagi.text("");
 		dateAnn.text("");
 		startTime.text("");
@@ -90,6 +95,7 @@ var addAnnoun = function() {
 		placeAnn.text("");
 		description.text("");
 		validateInfo.text("");
+
 		dateAnn.off('focus');
 		startTime.off('focus');
 		endTime.off('focus');
@@ -138,14 +144,13 @@ function scrollTo(target){
 			}, 500);
 		}
 }
+
 function formatDate(date) {
     var month = date.getMonth()+1;
     var day = date.getDate();
-
     var output = date.getFullYear() + '-' +
         ((''+month).length<2 ? '0' : '') + month +
         '-' + ((''+day).length<2 ? '0' : '') + day;
-
     return output;
 }
 
@@ -356,6 +361,7 @@ function toogleWatch(){
 				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {					
 			    	setNofification(snapshot.val().author, 'addToWatch', snapshot.val(), userName);
 				});
+
 			  })
 			  .catch(function(error) {
 			    //console.log("Remove failed: " + error.message)
@@ -386,6 +392,22 @@ function toogleWatch(){
 		}		
 	});
 }
+
+function getProfile() {
+	var userId = firebase.auth().currentUser.uid;
+	database.child('users/' + userId).once("value").then(function(snapshot) {
+	    var user = snapshot.val();
+        $('#currentEmail').text(user.email);
+        $('#currentNick').text(user.name);
+	});
+	goToSite('profileSettingsPage');
+}
+
+function saveProfile() {
+    var userId = firebase.auth().currentUser.uid;
+    var newNick = $('#nickprof').val();
+    database.child('users/' + userId).update({name: newNick});
+    getAllAnn();
 
 function showMyAnnoun(key, back){
 	switch(back){
@@ -547,5 +569,5 @@ function setNofification(receiver, reason, announ, author){
 			titl: title,
 			infoText: content
 		};
-	database.child('users/' + receiver + '/notifications/' ).push().set(notiData);			
+	database.child('users/' + receiver + '/notifications/' ).push().set(notiData);	
 }

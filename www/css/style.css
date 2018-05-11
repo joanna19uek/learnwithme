@@ -225,7 +225,6 @@ body {
     right: 20px;
     bottom: 20px;
     width: 45%;
-
 }
 
 #myDetailsFooter {
@@ -368,6 +367,7 @@ body {
     position: relative;
     left: 0px;
 }
+
 #saveChangesEditProfile {
     width: 90%;
     font-size: 15px;
@@ -439,6 +439,10 @@ body {
     left: 20px;
 }
 
+.ident {
+    margin-left: 30px;
+}
+
 #currentEmail, #currentNick {
     opacity: 0.6;
     margin-top: 8px;
@@ -498,5 +502,3 @@ body {
     right: 0;
     bottom: 0;
 }
-
-
