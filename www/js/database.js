@@ -100,6 +100,8 @@ var addAnnoun = function() {
 		validateInfo.html("Upewnij się czy wprowadzona <strong>data</strong> jest co najmniej dniem dzisiejszym, a godzina <strong>rozpoczęścia</strong> <br>jest wcześniejszą niż <strong>zakończenia</strong> oraz czy już nie <strong>minęła.</strong>")
 		scrollTo(validateInfo);
 	}
+	var ms = 'Dodano ogłoszenie.';
+	toast(ms,600);
 };
 function validateTime(sTime, eTime){	
 	sTime = sTime.split(":");
@@ -414,13 +416,15 @@ function showMyAnnoun(key, back){
 
 function changeStatus(back){
 	var newKey = $('#myAnnKeyDetail').text();
+	var ms = 'Odwołano spotkanie.';
 	database.child('/classifieds/' + newKey).update({active: false});
 	switch (back){
 		case '#MyAnnDetailsPage':
 			showMyAnnoun(newKey);
 		default:
 		getMyAnn();
-	}	
+	}
+	toast(ms,600);	
 }
 var toast=function(msg, time){
 	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")

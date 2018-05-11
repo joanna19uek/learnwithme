@@ -319,4 +319,5 @@ function chartClick(dbData, days){
 function sendMail()
 {
   var ms = 'Wszelkie problemy i pytania proszę zgłaszać na adres e-mail: <b style="color:#ff0000">pomoc@pomoc.com<b>';
+  toast(ms, 3000);
 }
