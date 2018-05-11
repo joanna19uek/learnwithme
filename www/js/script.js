@@ -93,10 +93,8 @@ $(document).ready(function(){
 	*/
     //EVENT LISTENER DO LOGOWANIA PRZEZ GOOGLE
     btnGLogIn.on('click', function() {
-        var info = $('#info');
-        var provider = new firebase.auth.GoogleAuthProvider();
         info.html("Próba logowania do Google...");
-
+        var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithRedirect(provider).then(function() {
             return firebase.auth().getRedirectResult();
         }).then(function(result) {
@@ -138,6 +136,15 @@ $(document).ready(function(){
 		if (nickReg == null || nickReg == "") {
 		    nickReg = emailReg.substring(0, emailReg.indexOf('@'));
 	    }
+	    emailReg.on('focus', function(){
+		$(this).css("box-shadow", "none");
+		});
+		passwdReg1Input.on('focus', function(){
+		$(this).css("box-shadow", "none");
+		});
+		passwdReg2Input.on('focus', function(){
+		$(this).css("box-shadow", "none");
+		});
 		var info = document.getElementById('regInfo');
 		info.style.color = "red";
 		if (passwdReg1 === passwdReg2) {
@@ -147,20 +154,20 @@ $(document).ready(function(){
 				switch (e.code){
 					case "auth/invalid-email":
 						info.text("Niepoprawny email!");
-						emailRegInput.css("border", "3px solid #ff7777");
+						emailRegInput.css("box-shadow", "2px 2px 2px red");
 						console.log(e.code);
 						break;
 					case "auth/weak-password":
 						info.text("Hasło musi zawierać co najlniej 6 znaków!");
-						passwdReg1Input.css("border", "3px solid #ff7777");
-						passwdReg2Input.css("border", "3px solid #ff7777");
+						passwdReg1Input.css("box-shadow", "2px 2px 2px red");
+						passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 						console.log(e.code);
 						break;
 					case "auth/email-already-in-use":
 						info.text("Email jest już w użyciu!");
-						emailRegInput.css("border", "3px solid #ff7777");
-						passwdReg1Input.css("border", "0px solid #ff7777");
-						passwdReg2Input.css("border", "0px solid #ff7777");
+						emailRegInput.css("box-shadow", "2px 2px 2px red");
+						passwdReg1Input.css("box-shadow", "2px 2px 2px red");
+						passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 						console.log(e.code);
 						break;
 					default:
@@ -171,17 +178,17 @@ $(document).ready(function(){
 			});
 			promise.then(function(){
 				info.innerText = "";
-				emailRegInput.css("border", "0px solid #ff7777");
-				passwdReg1Input.css("border", "0px solid #ff7777");
-				passwdReg2Input.css("border", "0px solid #ff7777");
+				emailRegInput.css("border", "0px solid #ff7777").val("").off('focus');
+				passwdReg1Input.css("border", "0px solid #ff7777").val("").off('focus');
+				passwdReg2Input.css("border", "0px solid #ff7777").val("").off('focus');
 				addUserToDB(emailReg, nickReg, firebase.auth().currentUser.uid);
 				goToSite('afterRegPage');
 			});
 		} else {
 			console.log("Hasła są niepoprawne");
 			info.text("Hasła nie są identyczne!");
-			passwdReg1Input.css("border", "3px solid #ff7777");
-			passwdReg2Input.css("border", "3px solid #ff7777");
+			passwdReg1Input.css("box-shadow", "2px 2px 2px red");
+			passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 		}
 	});
   

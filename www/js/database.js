@@ -385,7 +385,8 @@ function showMyAnnoun(key, back){
 	}
 	var myAnnKey = key;
 	var myId = firebase.auth().currentUser.uid;
-	goToSite('myAnnDetailsPage');	
+	goToSite('myAnnDetailsPage');
+	
 	//$('#detailBack').attr('href', back);
 	$('#myAnnKeyDetail').text(myAnnKey);
 	var myWatchKey = [];
@@ -413,4 +414,20 @@ function changeStatus(back){
 		default:
 		getMyAnn();
 	}	
+}
+var toast=function(msg, time=600){
+	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
+	.css({ display: "block",
+		'background-color': 'rgba(100, 150, 150, 0.7)', 
+		opacity: 0.90, 
+		position: "fixed",
+		padding: "7px",
+		"text-align": "center",
+		width: "270px",
+		left: ($(window).width() - 284)/2,
+		top: $(window).height()/2 })
+	.appendTo( $.mobile.pageContainer ).delay( 1500 )
+	.fadeOut( time, function(){
+		$(this).remove();
+	});
 }
