@@ -97,7 +97,7 @@ var addAnnoun = function() {
 		placeAnn.off('focus');
 		description.off('focus');
 	}else {
-		validateInfo.html("Upewnij się czy wprowadzona <strong>data</strong> jest co najmniej dniem dzisiejszym, a godzina <strong>rozpoczęścia</strong> <br>jest wcześniejszą niż <strong>zakończenia</strong> oraz czy już nie <strong>minęła.</strong>")
+		validateInfo.html("Upewnij się czy wprowadzona <strong>data</strong> jest co najmniej dniem dzisiejszym, a godzina <strong>rozpoczęcia</strong> <br>jest wcześniejszą niż <strong>zakończenia</strong> oraz czy już nie <strong>minęła.</strong>")
 		scrollTo(validateInfo);
 	}
 	var ms = 'Dodano ogłoszenie.';
