@@ -256,12 +256,12 @@ function showMyAnnoun(key, back){
 	});
 }
 
-/*function changeStatus(key){
+function changeStatus(key){
 
 	var newKey = $('#myAnnKeyDetail').text();
-	database.child('/classifieds/' + newKey).update(active: false);
+	database.child('/classifieds/' + newKey).update({active: false});
 	goToSite('mainAdd');
-}*/
+}
 
 function toogleWatch(){
 	var newKey = $('#annKeyDetail').text();
