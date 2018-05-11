@@ -372,7 +372,7 @@ function toogleWatch(){
 				  return currentRank - 1;
 				});
 				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
-					console.log(snapshot.val());
+					//console.log(snapshot.val());
 			    	setNofification(snapshot.val().author, 'removeFromWatch', snapshot.val(), userName);
 				});
 			  })
@@ -473,13 +473,12 @@ function getNotifications(){
 
 	var mainContNotice = $("#notice > div[data-role='main']");
 	mainContNotice.empty();
-	var firstInfoNotice = '<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>';
-	mainContNotice.append(firstInfoNotice);
+	
 	database.child('users/' + firebase.auth().currentUser.uid + "/notifications").once("value", function(data) {
 		
 		if (data.val() != null) {
 			var notice = data.val();
-			$('#comNotice').hide();
+			$('#comNotice').remove();
 			
 			for(iter in notice){
 				var contentNotice = "<div class='noticeContainer'>" + 
@@ -493,6 +492,9 @@ function getNotifications(){
 						mainContNotice.children().first().before(contentNotice);					
 					}					
 			}
+		}else{
+			var firstInfoNotice = '<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>';
+			mainContNotice.append(firstInfoNotice);
 		}
 	});
 	goToSite('notice');
@@ -501,14 +503,18 @@ function getNotifications(){
 function removeNotification(key, notek){
 	let usId = firebase.auth().currentUser.uid;
 	var notifCont = $(notek).parent().get(0);
-	
+	var mainContNotice = $("#notice > div[data-role='main']");
 	database.child('/users/' + usId + '/notifications/' + key).remove().then(function() {
 			    notifCont.remove();
 			    console.log("Usunięto: " + key);
+			    if(mainContNotice.is(':empty')){
+					mainContNotice.append('<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>');
+				}
 			  })
 			  .catch(function(error) {
 			    console.log("Remove notification failed: " + error.message);
 			  });
+	
 }
 
 function setNofification(receiver, reason, announ, author){
@@ -518,19 +524,19 @@ function setNofification(receiver, reason, announ, author){
 	switch(reason){
 		case 'cancel':
 			title = 'Odwołano spotkanie';
-			content = '' + author + ' z dnia ' + announ.date + ' zostało odwołane.';
+			content = '<b>' + author + '</b> z dnia <b>' + announ.date + '</b> zostało odwołane.';
 			break;
 		case 'addToWatch':
 			title = 'Dodano obserwację';
-			content = 'Ogłoszenie z dnia ' + announ.date + ' jest obserwowane przez ' + author + '.';
+			content = 'Ogłoszenie z dnia <b>' + announ.date + '</b> jest obserwowane przez <b>' + author + '</b>.'
 			break;
 		case 'removeFromWatch':
 			title = 'Zaprzestano obserwacji';
-			content = author + ' przestał obserwować ogłoszenie z dnia ' + announ.date + '.';
+			content = '<b>' + author + '</b> przestał obserwować ogłoszenie z dnia <b>' + announ.date + '</b>.';
 			break;
 		case 'changeAnnoun':
 			title = 'Zmieniono szczegóły';
-			content = author + ' zmienił szczegóły ogłoszenia z dnia ' + announ.date + '.';
+			content = '<b>' + author + '</b> zmienił szczegóły ogłoszenia z dnia <b>' + announ.date + '</b>.';
 			break;
 		default:
 			title: '';
