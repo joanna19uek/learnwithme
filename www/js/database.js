@@ -325,5 +325,5 @@ function saveChanges(){
 	var newPlace = $('#placeEditAnn').val();
 	var newDescription = $('#descEditAnn').val();
 	database.child('/classifieds/' + newKey).update({place: newPlace, description: newDescription});
-	goToSite('MyAnnDetailsPage');
+	showMyAnnoun(newKey, back = '#mainAdd');
 }
