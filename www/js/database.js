@@ -341,13 +341,20 @@ function toogleWatch(){
 	var usId = firebase.auth().currentUser.uid;
 	var follNum = $('#followersNumb');
 	database.child('users/' + usId + "/watched/" + newKey).once("value").then(function(snapshot) {
-		myWatch = snapshot.val();		
+		myWatch = snapshot.val();
+		let userName = '';
+		database.child('/users/' + usId ).once("value").then(function(snapshot) {			
+		userName = snapshot.val().name;
+		});		
 		if(myWatch == null){
 			database.child('/classifieds/' + newKey + '/followsBy/' + usId).set(usId).then(function() {
 			    //console.log("Remove succeeded.")
 			    database.child('/classifieds/' + newKey + '/followersNumb').transaction(function(currentRank) {
 			    	follNum.text(currentRank + 1);
 				  return currentRank + 1;
+				});
+				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {					
+			    	setNofification(snapshot.val().author, 'addToWatch', snapshot.val(), userName);
 				});
 			  })
 			  .catch(function(error) {
@@ -363,6 +370,10 @@ function toogleWatch(){
 			    database.child('/classifieds/' + newKey + '/followersNumb').transaction(function(currentRank) {
 			    	follNum.text(currentRank - 1);
 				  return currentRank - 1;
+				});
+				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
+					console.log(snapshot.val());
+			    	setNofification(snapshot.val().author, 'removeFromWatch', snapshot.val(), userName);
 				});
 			  })
 			  .catch(function(error) {
@@ -413,11 +424,26 @@ function showMyAnnoun(key, back){
 }
 
 function changeStatus(back){
+	var myId = firebase.auth().currentUser.uid;
 	var newKey = $('#myAnnKeyDetail').text();
 	var ms = 'Odwołano spotkanie.';
+	let authNeme = $('#usersAnnMyDetails').text();
 	database.child('/classifieds/' + newKey).update({active: false});
+	/*
+	database.child('/users/' + myId + 'name').once("value").then(function(snapshot) {
+		authNeme.snapshot.val();
+	}
+	*/
+	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
+		console.log(snapshot.val());
+		for(watcher in snapshot.val().followsBy){
+			console.log(watcher);
+			setNofification(watcher, 'cancel', snapshot.val(), authNeme);
+		}
+
+	});
 	switch (back){
-		case '#MyAnnDetailsPage':
+		case '#myAnnDetailsPage':
 			showMyAnnoun(newKey);
 		default:
 		getMyAnn();
@@ -483,4 +509,37 @@ function removeNotification(key, notek){
 			  .catch(function(error) {
 			    console.log("Remove notification failed: " + error.message);
 			  });
+}
+
+function setNofification(receiver, reason, announ, author){
+	let usId = firebase.auth().currentUser.uid;	
+	title = '';
+	content = '';
+	switch(reason){
+		case 'cancel':
+			title = 'Odwołano spotkanie';
+			content = 'Ogłoszenie ' + announ.tags + ' użytkownika ' + author + ' zostało odwołane';
+			break;
+		case 'addToWatch':
+			title = 'Dodano obserwację';
+			content = 'Ogłoszenie ' + announ.tags + ' jest obserwowane przez ' + author;
+			break;
+		case 'removeFromWatch':
+			title = 'Zaprzestano obserwacji';
+			content = author + ' przeształ obserwować ogłoszenie ' + announ.tags;
+			break;
+		case 'changeAnnoun':
+			title = 'Zmieniono szczegóły';
+			content = author + ' zmienił szczegóły ogłoszenia: ' + announ.tags;
+			break;
+		default:
+			title: '';
+			content: '';
+
+	}
+	var notiData = {
+			titl: title,
+			infoText: content
+		};
+	database.child('users/' + receiver + '/notifications/' ).push().set(notiData);			
 }
