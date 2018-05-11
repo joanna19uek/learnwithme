@@ -71,7 +71,7 @@
                 <button class="ui-btn ui-corner-all" id="zarejestruj" onclick="goToSite('afterRegPage')">Zarejestruj</button>                
             </div>
         </div>
-		
+      
 		<!-- After registration page -->
         <div data-role="page" id="afterRegPage">
             <div data-role="header" class="header">
@@ -80,15 +80,14 @@
           
             <div data-role="main" class="ui-content">
                 <div id="aftRegCom">
-					<h2>Sukces!</h2>
-					<p>Gratulacje!<br>
-						Twoje konto zostało poprawnie utworzone.<br>
-						Możesz przejść do serwisu klikając w poniższy przycisk.
-					</p>
-				</div>
-				<img src="img/downarr.png" id="downArrow"/>
-
-				<button class="ui-btn ui-corner-all" id="przejdzDoSerwisu" onclick="getAllAnn()">Przejdź do serwisu</button>
+                  <h2>Sukces!</h2>
+                  <p>Gratulacje!<br>
+                    Twoje konto zostało poprawnie utworzone.<br>
+                    Możesz przejść do serwisu klikając w poniższy przycisk.
+                  </p>
+                </div>
+                <img src="img/downarr.png" id="downArrow"/>
+                <button class="ui-btn ui-corner-all" id="przejdzDoSerwisu" onclick="getAllAnn()">Przejdź do serwisu</button>
             </div>
         </div>
 
@@ -109,7 +108,7 @@
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
@@ -144,7 +143,7 @@
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
@@ -179,7 +178,7 @@
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
@@ -380,19 +379,12 @@
         <!-- Notification page -->
         <div data-role="page" id="notice">
             <div data-role="header" class="header">
-                <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
+                <button class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt" onclick="getAllAnn()"></button>
                 <h1>Powiadomienia</h1>
-            </div>
-          
+            </div>          
             <div data-role="main" class="ui-content">
-                <div id="noticeContainer">
-                    <p id="noticeHead">Odwołanie spotkania</p>
-                    <p id="noticeText">Użytkownik X odwołał spotkanie z dnia Y godzina Z.</p>
-                    <a href="" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext deletebutt"></a>
-                </div>
             </div>
-            <div data-role="footer">
-               
+            <div data-role="footer">  
             </div>
         </div>
 
