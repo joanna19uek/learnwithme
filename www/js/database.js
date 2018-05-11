@@ -333,6 +333,7 @@ function showThisAnnoun(key, back){
 }
 
 function toogleWatch(){
+	var ms = '';
 	var newKey = $('#annKeyDetail').text();
 	var myWatch;
 	var usId = firebase.auth().currentUser.uid;
@@ -352,6 +353,8 @@ function toogleWatch(){
 			  });
 			database.child('/users/' + usId + '/watched/' + newKey).set(newKey);			
 			$('#imgDetails').attr('src', 'img/greenBook-big.png');
+			ms = 'Dodano do obserwowanych.';
+			toast(ms,600);
 		}else{
 			database.child('/classifieds/' + newKey + '/followsBy/' + usId).remove().then(function() {
 			    //console.log("Remove succeeded.")
@@ -365,8 +368,12 @@ function toogleWatch(){
 			  });
 			database.child('/users/' + usId + '/watched/' + newKey).remove();			
 			$('#imgDetails').attr('src', 'img/128greybook.png');
+			ms = 'Usunięto z obserwowanych.';
+			toast(ms,600);
 		}		
 	});
+	
+
 }
 
 function showMyAnnoun(key, back){
@@ -415,14 +422,15 @@ function changeStatus(back){
 		getMyAnn();
 	}	
 }
-var toast=function(msg, time=600){
+var toast=function(msg, time){
 	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
 	.css({ display: "block",
-		'background-color': 'rgba(100, 150, 150, 0.7)', 
-		opacity: 0.90, 
+		'background-color': 'rgba(121, 154, 192, 1)', 
+		opacity: 1, 
 		position: "fixed",
 		padding: "7px",
 		"text-align": "center",
+		color: 'rgba(255, 255, 255, 1)',
 		width: "270px",
 		left: ($(window).width() - 284)/2,
 		top: $(window).height()/2 })
