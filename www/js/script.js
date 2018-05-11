@@ -7,8 +7,8 @@ function goToSite(id){
 (function() {
     // Initialize Firebase
     var config = {
-        //apiKey: "AIzaSyC2E9hI9X2e2KCHyEiaz5vcaFXOFvY0HQc",    //browser key
-        apiKey: "AIzaSyBpHX7UlYiPCqkTRxFOi6bisAspEvOGMa4",    //android key
+        apiKey: "AIzaSyC2E9hI9X2e2KCHyEiaz5vcaFXOFvY0HQc",    //browser key
+        //apiKey: "AIzaSyBpHX7UlYiPCqkTRxFOi6bisAspEvOGMa4",    //android key
         authDomain: "learnwithme-98129.firebaseapp.com",
         databaseURL: "https://learnwithme-98129.firebaseio.com",
         projectId: "learnwithme-98129",
@@ -95,32 +95,49 @@ $(document).ready(function(){
     btnGLogIn.on('click', function() {
         info.html("Próba logowania do Google...");
         var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider).then(function() {
-            return firebase.auth().getRedirectResult();
-        }).then(function(result) {
-            var token = result.credential.accessToken;
+        firebase.auth().useDeviceLanguage();
+        firebase.auth().signInWithRedirect(provider);
+        firebase.auth().getRedirectResult().then(function(result) {
+            if (result.credential) {
+                var token = result.credential.accessToken;
+                console.log(token);
+            }
             var user = result.user;
             console.log(user);
         }).catch(function(error) {
             var errorCode = error.code;
+            console.log(errorCode);
             var errorMessage = error.message;
+            console.log(errorMessage);
+            var email = error.email;
+            console.log(email);
+            var credential = error.credential;
+            console.log(credential);
         });
     });
 
-    //EVENT LISTENER DO LOGOWANIA PRZEZ GOOGLE
+    //EVENT LISTENER DO LOGOWANIA PRZEZ FB
     btnFBLogIn.on('click', function() {
         info.html("Próba logowania do FB...");
         var provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().useDeviceLanguage();
-        firebase.auth().signInWithRedirect(provider).then(function() {
-            return firebase.auth().getRedirectResult();
-        }).then(function(result) {
-            var token = result.credential.accessToken;
+        firebase.auth().signInWithRedirect(provider);
+        firebase.auth().getRedirectResult().then(function(result) {
+            if (result.credential) {
+                var token = result.credential.accessToken;
+                console.log(token);
+            }
             var user = result.user;
             console.log(user);
         }).catch(function(error) {
             var errorCode = error.code;
+            console.log(errorCode);
             var errorMessage = error.message;
+            console.log(errorMessage);
+            var email = error.email;
+            console.log(email);
+            var credential = error.credential;
+            console.log(credential);
         });
     });
 
@@ -205,7 +222,12 @@ $(document).ready(function(){
     //EVENT LISTENER ZMIANY STATUSU ZALOGOWANIA
     firebase.auth().onAuthStateChanged(firebaseUser => {
         if(firebaseUser){
-            console.log(firebaseUser);
+            firebase.database().ref().child('users/' + firebaseUser.uid).once('value', function(snap) {
+                if (snap.val() == null) {
+                    addUserToDB(firebaseUser.email, firebaseUser.displayName, firebaseUser.uid);
+                }
+            });
+            getAllAnn();
         } else {
             console.log("User not logged in");
         }
