@@ -305,16 +305,17 @@ function getAnn(){
 	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
 		var ann = snapshot.val();
 		$('#tagsEditAnn').val(ann.tags);
-		$('#dateEditAnn').val(ann.date);
 		$('#startTimeEditAnn').val(ann.startTime);
 		$('#endTimeEditAnn').val(ann.endTime);
 		$('#placeEditAnn').val(ann.place);
 		$('#descEditAnn').val(ann.description);
 		//console.log(snapshot);
 		console.log(snapshot.val());
-		$("ann.date").datapicker({dateFormat: "dd-mm-rrrr"});
+		var date = ann.date;
+		date = date.split("-");
+		date = date[2]+"-"+date[1]+"-"+date[0];
+		$('#dateEditAnn').val(date);
 	});
-
 	goToSite('editAnnoun');
 }
 
