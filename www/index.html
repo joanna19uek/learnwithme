@@ -10,6 +10,8 @@
         <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
         <script type="text/javascript" src="js/script.js"></script>
         <script type="text/javascript" src="js/database.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/Chart.bundle.min.js"></script>
     </head>
     <body>
         <!-- Start page -->
@@ -36,7 +38,9 @@
                     <input type="text" placeholder="Email" id="email"/>
                     <input type="password" placeholder="Hasło" id="haslo"/>
                 </div>
-                <p id="logInfo"></p>
+                <p id="logInfo">
+                    <br>
+                </p>
                 <button class="ui-btn ui-corner-all" id="zaloguj">Zaloguj</button>
                 <br>
                 <p align="center">LUB</p>
@@ -46,7 +50,7 @@
             </div>
         </div>
       
-        <!-- Regestration page -->
+        <!-- Registration page -->
         <div data-role="page" id="regPage">
             <div data-role="header" class="header">
                 <a href="#startPage" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
@@ -67,8 +71,8 @@
                 <button class="ui-btn ui-corner-all" id="zarejestruj" onclick="goToSite('afterRegPage')">Zarejestruj</button>                
             </div>
         </div>
-		
-		<!-- After regestration page -->
+      
+		<!-- After registration page -->
         <div data-role="page" id="afterRegPage">
             <div data-role="header" class="header">
                 <h1 id="finrejhead">Finalizacja rejestracji</h1>
@@ -76,14 +80,15 @@
           
             <div data-role="main" class="ui-content">
                 <div id="aftRegCom">
-					<h2>Sukces!</h2>
-					<p>Gratulacje!<br>
-						Twoje konto zostało poprawnie utworzone.<br>
-						Możesz przejść do serwisu klikając w poniższy przycisk.
-					</p>
-				</div>
-				<img src="img/downarr.png" id="downArrow"/>
-				<button class="ui-btn ui-corner-all" id="przejdzDoSerwisu">Przejdź do serwisu</button>
+                  <h2>Sukces!</h2>
+                  <p>Gratulacje!<br>
+                    Twoje konto zostało poprawnie utworzone.<br>
+                    Możesz przejść do serwisu klikając w poniższy przycisk.
+                  </p>
+                </div>
+                <img src="img/downarr.png" id="downArrow"/>
+                <button class="ui-btn ui-corner-all" id="przejdzDoSerwisu" onclick="getAllAnn()">Przejdź do serwisu</button>
+
             </div>
         </div>
 
@@ -93,10 +98,10 @@
                 <a href="#sideMenu" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn" data-role="button" role="button"></a>
                 <h1 id="mainAllHeader">LearnWithMe</h1>
                 <div data-role="controlgroup" id="controlBtns" class="btn-group">
-                  <button class="ui-btn" id="all" >Ogłoszenia</button>
+                  <button class="ui-btn" id="all">Ogłoszenia</button>
                   <button class="ui-btn" id="added" onclick="getMyAnn()">Dodane</button>
                   <button class="ui-btn" id="watched" onclick="getMyWatched()">Obserwowane</button>
-                </div>
+                </div>  
             </div>
 
             <div data-role="panel" id="sideMenu" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
@@ -104,24 +109,22 @@
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="logout()">Wyloguj</button></li>
                     </ul>
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
           
             <div data-role="main" class="ui-content">
-
             </div>
-
             <div data-role="footer" data-position="fixed" id="footmain">
-                <button class="dodajBtn" onclick="addNewAnn()">+</button>
-            </div>
+                <button class="dodajBtn" onclick="addNewAnn()">+</button> 
+          </div>
         </div>
 
         <!-- Main page - added -->
@@ -135,29 +138,24 @@
                   <button class="ui-btn" id="watchedAd" onclick="getMyWatched()">Obserwowane</button>
                 </div>
             </div>
-
             <div data-role="panel" id="sideMenu1" data-position="left" data-display="overlay" data-theme="a" class="ui-panel ui-panel-position-left ui-panel-display-overlay ui-body-a ui-panel-animate ui-panel-open">
                 <div class="ui-panel-inner">
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="logout()">Wyloguj</button></li>
                     </ul>
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
-
-            <div data-role="main" class="ui-content">
-
-            </div>
-
+            <div data-role="main" class="ui-content"></div>
             <div data-role="footer" data-position="fixed" id="footmainAd">
-                <button class="dodajBtn" onclick="addNewAnn()">+</button>
+                <button class="dodajBtn" onclick="addNewAnn()">+</button> 
             </div>
         </div>
 
@@ -178,21 +176,18 @@
                     <h2 style="margin-left: 70px"><img src="img/logo.png" class="menuLogo"/>LearnWithMe</h2>
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="goToSite('notice')">Powiadomienia</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage')">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="goToSite('loginPage')">Wyloguj</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="goToSite('profileSettingsPage')">Edytuj Profil</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-logout ui-btn-icon-left sideMenuButton" onclick="logout()">Wyloguj</button></li>
                     </ul>
                     <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline sideMenuButton">Zamknij panel</a>
                 </div>
             </div>
 
-            <div data-role="main" class="ui-content">
-
-            </div>
-
+            <div data-role="main" class="ui-content"></div>
             <div data-role="footer" data-position="fixed" id="footmainWat">
                 <button class="dodajBtn" onclick="addNewAnn()">+</button>
             </div>
@@ -229,7 +224,7 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="footerNewAnn">
-                <button class="ui-btn" id="cancBtnNewAnn" onclick="goToSite('mainAll')">Anuluj</button>
+                <button class="ui-btn" id="cancBtnNewAnn" onclick="goToSite('mainAll')">Anuluj</button> 
                 <button class="ui-btn" id="addBtnNewAnn" onclick="addAnnoun()">Dodaj</button>
             </div>
         </div>
@@ -264,8 +259,8 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="footerEditAnn">
-                <button class="ui-btn" id="deleteBtnEditAnn">Odwołaj</button>
-                <button class="ui-btn" id="cancBtnEditAnn" onclick="goToSite('MyAnnDetailsPage')">Anuluj</button>
+                <button class="ui-btn" id="deleteBtnEditAnn"  onclick="changeStatus('myAnnDetailsPage')">Odwołaj</button> 
+                <button class="ui-btn" id="cancBtnEditAnn" onclick="goToSite('myAnnDetailsPage')">Anuluj</button> 
                 <button class="ui-btn" id="saveBtnEditAnn">Zapisz zmiany</button>
             </div>
         </div>
@@ -273,9 +268,6 @@
         <!-- Announcement details page -->
         <div data-role="page" id="annDetailsPage">
             <div data-role="header" class="header">
-                <!--
-                <a href="#mainAll" id="detailBack" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
-                -->
                 <button  id="detailBackAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getAllAnn()"></button>
                 <button  id="detailBackWat" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getMyWatched()"></button>
                 <h1>Ogłoszenie</h1>
@@ -299,24 +291,26 @@
         <!-- My announcement details page -->
         <div data-role="page" id="myAnnDetailsPage">
             <div data-role="header" class="header">
-                <a href="#mainAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt"></a>
+                <button  id="myDetailBackAll" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getAllAnn()"></button>
+                <button  id="myDetailBackMy" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="getMyAnn()"></button>
                 <h1>Ogłoszenie</h1>
-                <h2 id="usersAnnMyDetails">Ogłoszenie użytkownika X</h2>
+                <h2 id="usersAnnMyDetails"></h2>
+                <span class="annKey" id="myAnnKeyDetail"></span>
             </div>
           
             <div data-role="main">
                 <div id="infosMyDetails">
-                    Data: <span id="dateMyDetails">12.04</span><br>
-                    Godziny: <span id="startTimeMyDetails">9:35</span> - <span id="endTimeMyDetails">11:45</span><br>
-                    Miejsce: <span id="placeMyDetails">Paw. A, piętro 2</span><br>
-                    Opis: <span id="descMyDetails">Krótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opisKrótki opis</span><br>
-                    Tagi: <span id="tagsMyDetails">matematyka</span>
+                    Data: <span id="dateMyDetails"></span><br>
+                    Godziny: <span id="startTimeMyDetails"></span> - <span id="endTimeMyDetails"></span><br>
+                    Miejsce: <span id="placeMyDetails"></span><br>
+                    Opis: <span id="descMyDetails"></span><br>
+                    Tagi: <span id="tagsMyDetails"></span>
                 </div>
             </div>
 
             <div data-role="footer" data-position="fixed" id="myDetailsFooter">
-                <button class="ui-btn" id="odwolaj" onclick="">Odwołaj</button>
-                <button class="ui-btn" id="edytuj" onclick="goToSite('editAnnoun')">Edytuj</button>
+                <button class="ui-btn" id="odwolaj"  onclick="changeStatus()">Odwołaj</button>  
+                <button class="ui-btn" id="edytuj" onclick="alert('Cholerka, coś tutaj nie działa! :(')">Edytuj</button>
             </div>
         </div>
       
@@ -330,30 +324,30 @@
             <div data-role="main">
                 <div id="Pawel">
                     <p id="PawTekst">
-                        Jestem Paweł Grzyb. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne.I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne.
+                        Nazywam się Paweł Grzyb, od 4 lat student informatyki stosowanej na UEK. Do grona zainteresowań zaliczyć mogę lekturę książek (najczęściej fanstastyka), gry komputerowe (nie gaming lecz ich rozwój) oraz muzyka z gatunku Rock. Do ulubionej serii książek to saga o Wiedźminie łącznie z opowiadaniami oraz przygody Artemisa Fowl. Nie stronie również od gier planszowych.
                     </p>
                 </div>
          
                 <div id="Asiam">
                     <p id="AsTekst">
-                        Jestem Joanna Pełeńska. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne.
+                        Nazywam się Joanna Pełeńska. Jestem kierowniczką tego projektu. Studiuję informatykę na Uniwersytecie Ekonomicznym w Krakowie. Mam bardzo duże doświadczenie jako programistka, administratorka baz oraz jako ogólnie rozumiany informatyk. Moimi szczególnymi umiejętnościami jest znakomite zarządzanie ludźmi, dlatego też zawyczaj realizuję się jako kierowniczka projektów.
                     </p>
                 </div>
             
                 <div id="Rudzisz">
                     <p id="LukTekst">
-                        Jestem Łukasz Rudzisz. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne.
+                        Nazywam się Łukasz Pudzisz. Studiuję informatykę na Uniwersytecie Ekonomicznym w Krakowie. Jestem zapalonym programistą, znam biegle takie języki jak Java czy JavaScript, uczę się C/C++ oraz jestem biegłym operatorem baz danych i twórcą stron internetowych. Jeśli poszukujesz pracownika z takimi umiejętnościami - pisz.
                     </p>
                 </div>
              
                 <div id="Radek">
                     <p id="RadTekst">
-                        Jestem Radosław Smyksy. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne. I lubie pociągi. Pociągi są fajne. Bardzo fajne.
+                        Nazywam się Radosław Smyksy i studiuję informatykę stosowaną na Uniwersytecie Ekonomicznym w Krakowie. Jestem oddanym fanem EUIV, CK2 oraz wszelkich gier wydawanych przez Paradox Interactive, lubię czytać książki (powieści historyczne oraz fantasy) oraz zdarza mi się posłuchać wszelkiego rodzaju muzyki.
                     </p>
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="kontaktFooter">
-                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="">Kontakt</button>
+                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="sendMail()">Kontakt</button>     
             </div>
         </div>
 
@@ -379,5 +373,36 @@
                 <button class="ui-btn ui-corner-all" id="saveChangesEditProfile" onclick="saveProfile()">Zapisz zmiany</button>
             </div>
         </div>
+
+        <!-- Notification page -->
+        <div data-role="page" id="notice">
+            <div data-role="header" class="header">
+                <button class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt" onclick="getAllAnn()"></button>
+                <h1>Powiadomienia</h1>
+            </div>          
+            <div data-role="main" class="ui-content">
+            </div>
+            <div data-role="footer">  
+            </div>
+        </div>
+
+       <!-- Statistic page -->
+        <div data-role="page" id="chartPage" >
+            <div data-role="header" class="header">
+                <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
+                <h1>Statystyki</h1>
+            </div>
+          
+            <div data-role="main" class="ui-content">
+                Wykres przedstawia ilość ogłoszeń dodanych przez użykowników w ciągu ostatnich 7 dni.
+                <div id="chDiv">
+                    <canvas id="chart" width="100%" height="100%"></canvas>
+                </div>
+            </div>
+
+            <div data-role="footer" data-position="fixed">        
+            </div>
+        </div>
+
     </body>
 </html>

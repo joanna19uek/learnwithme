@@ -141,7 +141,7 @@ body {
     float: left;
     background-color: #799AC0;
     color: #ffffff;
-    font-size: 12px;  
+    font-size: 12px;
     text-shadow: none;
     opacity: 0.6;
     border: 1px solid #000000;
@@ -150,7 +150,7 @@ body {
 
 #all, #addedAd, #watchedWat {
     opacity: 1;
-    
+
 }
 
 .dodajBtn{
@@ -169,7 +169,7 @@ body {
 
 #footmain, #footmainAd, #footmainWat {
     background-color: transparent!important;
-   
+
 }
 
 #mainAll, #mainAdd, #mainWatched {
@@ -363,10 +363,9 @@ body {
 
 }
 
-#detailBackWat {
+#detailBackWat, #myDetailBackMy {
     position: relative;
     left: 0px;
-
 }
 
 #saveChangesEditProfile {
@@ -415,7 +414,7 @@ body {
     background-size: 23px 23px;
     background-color: #1E2D3E;
     color: #FFFFFF;
-    border-radius: 0px; 
+    border-radius: 0px;
 }
 .ui-icon-logout:after {
     background-image: url("../icon/logout-48.png");
@@ -442,4 +441,64 @@ body {
 
 .ident {
     margin-left: 30px;
+}
+
+#currentEmail, #currentNick {
+    opacity: 0.6;
+    margin-top: 8px;
+}
+
+#comAll, #comAdd, #comWatched, #comNotice {
+    width: 92%;
+    position: absolute;
+    top: 150px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#notice {
+    background-color: #D3D9E0;
+}
+
+.noticeContainer {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.noticeHead {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 0;
+    margin-left: 3px
+}
+
+.noticeText {
+    margin-bottom: 0;
+    font-size: 12px;
+    position: absolute;
+    left: 3px;
+    right: 3px;
+}
+
+.deletebutt {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    margin-top: 0;
+    border: none!important;
+    padding: none!important;
+    background-color: #000000!important;
+}
+
+#chDiv {
+    width: 100%;
+    position: absolute;
+    top: 130px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
