@@ -318,6 +318,10 @@ function getAnn(){
 }
 
 function saveChanges(){
-	
+
+	var newKey = $('#myAnnKeyDetail').text();
+	var newPlace = $('#placeEditAnn').val();
+	var newDescription = $('#descEditAnn').val();
+	database.child('/classifieds/' + newKey).update({place: newPlace, description: newDescription});
 	goToSite('MyAnnDetailsPage');
 }
