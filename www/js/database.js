@@ -191,7 +191,7 @@ function getAllAnn() {
 			}
 		}
 	});	
-	goToSite('mainAll');	
+	goToSite('mainAll');
 }
 
 function checkAnnMoment(coll){
@@ -374,8 +374,6 @@ function toogleWatch(){
 			toast(ms,600);
 		}		
 	});
-	
-
 }
 
 function showMyAnnoun(key, back){
@@ -442,4 +440,47 @@ var toast=function(msg, time){
 	.fadeOut( time, function(){
 		$(this).remove();
 	});
+}
+
+function getNotifications(){
+	let usId = firebase.auth().currentUser.uid;
+
+	var mainContNotice = $("#notice > div[data-role='main']");
+	mainContNotice.empty();
+	var firstInfoNotice = '<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>';
+	mainContNotice.append(firstInfoNotice);
+	database.child('users/' + firebase.auth().currentUser.uid + "/notifications").once("value", function(data) {
+		
+		if (data.val() != null) {
+			var notice = data.val();
+			$('#comNotice').hide();
+			
+			for(iter in notice){
+				var contentNotice = "<div class='noticeContainer'>" + 
+						"<p class='noticeHead'>" + notice[iter].titl + "</p>" + 
+						"<p class='noticeText'>" + notice[iter].infoText + "</p>" +
+                    	"<button class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext deletebutt' onclick='removeNotification(\"" + iter + "\", this)'></button>" +
+                		"</div>";	                				
+					if(mainContNotice.is(':empty')){				
+						mainContNotice.append(contentNotice);
+					}else{
+						mainContNotice.children().first().before(contentNotice);					
+					}					
+			}
+		}
+	});
+	goToSite('notice');
+}
+
+function removeNotification(key, notek){
+	let usId = firebase.auth().currentUser.uid;
+	var notifCont = $(notek).parent().get(0);
+	
+	database.child('/users/' + usId + '/notifications/' + key).remove().then(function() {
+			    notifCont.remove();
+			    console.log("Usunięto: " + key);
+			  })
+			  .catch(function(error) {
+			    console.log("Remove notification failed: " + error.message);
+			  });
 }

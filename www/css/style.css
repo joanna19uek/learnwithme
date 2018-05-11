@@ -444,7 +444,7 @@ body {
     margin-top: 8px;
 }
 
-#comAll, #comAdd, #comWatched {
+#comAll, #comAdd, #comWatched, #comNotice {
     width: 92%;
     position: absolute;
     top: 150px;
@@ -456,7 +456,7 @@ body {
     background-color: #D3D9E0;
 }
 
-#noticeContainer {
+.noticeContainer {
     background-color: #ffffff;
     height: 80px;
     width: 100%;
@@ -465,14 +465,14 @@ body {
     position: relative;
 }
 
-#noticeHead {
+.noticeHead {
     margin-top: 0;
     font-size: 22px;
     margin-bottom: 0;
     margin-left: 3px
 }
 
-#noticeText {
+.noticeText {
     margin-bottom: 0;
     font-size: 12px;
     position: absolute;
@@ -498,4 +498,5 @@ body {
     right: 0;
     bottom: 0;
 }
+
 
