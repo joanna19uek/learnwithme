@@ -372,7 +372,7 @@ function toogleWatch(){
 				  return currentRank - 1;
 				});
 				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
-					console.log(snapshot.val());
+					//console.log(snapshot.val());
 			    	setNofification(snapshot.val().author, 'removeFromWatch', snapshot.val(), userName);
 				});
 			  })
@@ -427,7 +427,7 @@ function changeStatus(back){
 	var myId = firebase.auth().currentUser.uid;
 	var newKey = $('#myAnnKeyDetail').text();
 	var ms = 'Odwołano spotkanie.';
-	let authNeme = $('#usersAnnMyDetails').text();
+	let authNeme = $('#usersAnnMyDetails').text().split(" ")[2];
 	database.child('/classifieds/' + newKey).update({active: false});
 	/*
 	database.child('/users/' + myId + 'name').once("value").then(function(snapshot) {
@@ -437,7 +437,7 @@ function changeStatus(back){
 	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
 		console.log(snapshot.val());
 		for(watcher in snapshot.val().followsBy){
-			console.log(watcher);
+			//console.log(watcher);
 			setNofification(watcher, 'cancel', snapshot.val(), authNeme);
 		}
 
@@ -473,13 +473,12 @@ function getNotifications(){
 
 	var mainContNotice = $("#notice > div[data-role='main']");
 	mainContNotice.empty();
-	var firstInfoNotice = '<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>';
-	mainContNotice.append(firstInfoNotice);
+	
 	database.child('users/' + firebase.auth().currentUser.uid + "/notifications").once("value", function(data) {
 		
 		if (data.val() != null) {
 			var notice = data.val();
-			$('#comNotice').hide();
+			$('#comNotice').remove();
 			
 			for(iter in notice){
 				var contentNotice = "<div class='noticeContainer'>" + 
@@ -493,6 +492,9 @@ function getNotifications(){
 						mainContNotice.children().first().before(contentNotice);					
 					}					
 			}
+		}else{
+			var firstInfoNotice = '<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>';
+			mainContNotice.append(firstInfoNotice);
 		}
 	});
 	goToSite('notice');
@@ -501,14 +503,18 @@ function getNotifications(){
 function removeNotification(key, notek){
 	let usId = firebase.auth().currentUser.uid;
 	var notifCont = $(notek).parent().get(0);
-	
+	var mainContNotice = $("#notice > div[data-role='main']");
 	database.child('/users/' + usId + '/notifications/' + key).remove().then(function() {
 			    notifCont.remove();
 			    console.log("Usunięto: " + key);
+			    if(mainContNotice.is(':empty')){
+					mainContNotice.append('<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>');
+				}
 			  })
 			  .catch(function(error) {
 			    console.log("Remove notification failed: " + error.message);
 			  });
+	
 }
 
 function setNofification(receiver, reason, announ, author){
@@ -518,19 +524,19 @@ function setNofification(receiver, reason, announ, author){
 	switch(reason){
 		case 'cancel':
 			title = 'Odwołano spotkanie';
-			content = 'Ogłoszenie ' + announ.tags + ' użytkownika ' + author + ' zostało odwołane';
+			content = 'Ogłoszenie użytkownika <b>' + author + '</b> z dnia <b>' + announ.date + '</b> zostało odwołane.';
 			break;
 		case 'addToWatch':
 			title = 'Dodano obserwację';
-			content = 'Ogłoszenie ' + announ.tags + ' jest obserwowane przez ' + author;
+			content = 'Ogłoszenie z dnia <b>' + announ.date + '</b> jest obserwowane przez <b>' + author + '</b>.'
 			break;
 		case 'removeFromWatch':
 			title = 'Zaprzestano obserwacji';
-			content = author + ' przeształ obserwować ogłoszenie ' + announ.tags;
+			content = 'Użytkownik <b>' + author + '</b> przestał obserwować ogłoszenie z dnia <b>' + announ.date + '</b>.';
 			break;
 		case 'changeAnnoun':
 			title = 'Zmieniono szczegóły';
-			content = author + ' zmienił szczegóły ogłoszenia: ' + announ.tags;
+			content = 'Użytkownik <b>' + author + '</b> zmienił szczegóły ogłoszenia z dnia <b>' + announ.date + '</b>.';
 			break;
 		default:
 			title: '';
@@ -542,4 +548,61 @@ function setNofification(receiver, reason, announ, author){
 			infoText: content
 		};
 	database.child('users/' + receiver + '/notifications/' ).push().set(notiData);			
+}
+
+function getProfile() {
+ 	var userId = firebase.auth().currentUser.uid;
+ 	$('#nickprof').val('');
+ 	database.child('users/' + userId).once("value").then(function(snapshot) {
+	    var user = snapshot.val();
+        $('#currentEmail').text(user.email);
+        $('#currentNick').text(user.name);
+ 	});
+ 	goToSite('profileSettingsPage');
+}
+
+function saveProfile() {
+    var userId = firebase.auth().currentUser.uid;
+    let inpNick = $('#nickprof');
+    var newNick = inpNick.val();
+    database.child('users/' + userId).update({name: newNick});
+    toast('Nazwa zostałą zmieniona.' ,600);
+    getAllAnn();    
+ }
+
+ function getAnn(){
+	var newKey = $('#myAnnKeyDetail').text();
+	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
+		var ann = snapshot.val();
+		$('#tagsEditAnn').val(ann.tags);
+		$('#startTimeEditAnn').val(ann.startTime);
+		$('#endTimeEditAnn').val(ann.endTime);
+		$('#placeEditAnn').val(ann.place);
+		$('#descEditAnn').val(ann.description);
+		//console.log(snapshot);
+		console.log(snapshot.val());
+		var date = ann.date;
+		date = date.split("-");
+		date = date[2]+"-"+date[1]+"-"+date[0];
+		$('#dateEditAnn').val(date);
+	});
+	goToSite('editAnnoun');
+}
+
+function saveChanges(){
+	var newKey = $('#myAnnKeyDetail').text();
+	var newPlace = $('#placeEditAnn').val();
+	var newDescription = $('#descEditAnn').val();
+	database.child('/classifieds/' + newKey).update({place: newPlace, description: newDescription});
+	let authNeme = $('#usersAnnMyDetails').text().split(' ')[2];
+	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {		
+		for(watcher in snapshot.val().followsBy){
+			console.log(watcher);
+			setNofification(watcher, 'changeAnnoun', snapshot.val(), authNeme);
+		}
+
+	});
+	var ms = 'Zapisano zmiany.';
+	toast(ms,600);	
+	showMyAnnoun(newKey, back = '#mainAdd');
 }

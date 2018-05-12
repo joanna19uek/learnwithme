@@ -153,7 +153,7 @@ $(document).ready(function(){
 		if (nickReg == null || nickReg == "") {
 		    nickReg = emailReg.substring(0, emailReg.indexOf('@'));
 	    }
-	    emailReg.on('focus', function(){
+	    emailRegInput.on('focus', function(){
 		$(this).css("box-shadow", "none");
 		});
 		passwdReg1Input.on('focus', function(){
