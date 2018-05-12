@@ -123,7 +123,7 @@ body {
 	margin-top: 40px!important;
 	background-color: #47525E;
 	color: #ffffff;
-	font-size: 15;
+	font-size: 15px;
 	display:block;
 	width:50%;
 	margin:0 auto;
@@ -141,8 +141,8 @@ body {
     float: left;
     background-color: #799AC0;
     color: #ffffff;
-    font-size: 12px;  
-    text-shadow: 0;
+    font-size: 12px;
+    text-shadow: none;
     opacity: 0.6;
     border: 1px solid #000000;
     border-radius: 0;
@@ -150,7 +150,7 @@ body {
 
 #all, #addedAd, #watchedWat {
     opacity: 1;
-    
+
 }
 
 .dodajBtn{
@@ -162,14 +162,14 @@ body {
     width: 60px !important;
     border-radius: 50px !important;
     border: 0 !important;
-    color: #ffffff !important;    
+    color: #ffffff !important;
     padding: 0px;
     font-size: 40px !important;
 }
 
 #footmain, #footmainAd, #footmainWat {
     background-color: transparent!important;
-   
+
 }
 
 #mainAll, #mainAdd, #mainWatched {
@@ -225,7 +225,6 @@ body {
     right: 20px;
     bottom: 20px;
     width: 45%;
-
 }
 
 #myDetailsFooter {
@@ -291,8 +290,8 @@ body {
     background-color: #00A6FF;
 }
 
-#footerNewAnn {
-    background-color: transparent!important;
+#footerNewAnn, #footerEditProfile {
+    background-color: transparent !important;
 }
 
 #kontaktBtn {
@@ -367,5 +366,139 @@ body {
 #detailBackWat, #myDetailBackMy, #myDetailBackAll {
     position: relative;
     left: 0px;
-    
+}
+
+#saveChangesEditProfile {
+    width: 90%;
+    font-size: 15px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    color: #ffffff;
+    background-color: #00A6FF;
+}
+
+#sideMenu, #sideMenu1, #sideMenu2 {
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+}
+
+.sideMenuButton {
+    background-color: #1E2D3E !important;
+    color: #FFFFFF !important;
+    border-style: none !important;
+    box-shadow: none !important;
+}
+
+.ui-icon-authors:after {
+    background-image: url("../icon/if_group_82700.png");
+    background-size: 23px 23px;
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+.ui-icon-statistics:after {
+    background-image: url("../icon/bar-chart-5-48.png");
+    background-size: 23px 23px;
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+.ui-icon-alerts:after {
+    background-image: url("../icon/topic-48.png");
+    background-size: 23px 23px;
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+.ui-icon-delete:after {
+    background-size: 23px 23px;
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+.ui-icon-logout:after {
+    background-image: url("../icon/logout-48.png");
+    background-size: 23px 23px;
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+.ui-icon-editUser:after {
+    background-image: url("../icon/edit-user-48.png");
+    background-size: 23px 23px;
+    background-color: #1E2D3E;
+    color: #FFFFFF;
+    border-radius: 0px;
+}
+
+.menuLogo {
+    background-color: #1E2D3E;
+    height: 55px;
+    width: 55px;
+    position: absolute;
+    left: 20px;
+}
+
+.ident {
+    margin-left: 30px;
+}
+
+#currentEmail, #currentNick {
+    opacity: 0.6;
+    margin-top: 8px;
+}
+
+#comAll, #comAdd, #comWatched, #comNotice {
+    width: 92%;
+    position: absolute;
+    top: 150px;
+    text-align: center;
+    color: #ffffff;
+}
+
+#notice {
+    background-color: #D3D9E0;
+}
+
+.noticeContainer {
+    background-color: #ffffff;
+    height: 80px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.noticeHead {
+    margin-top: 0;
+    font-size: 22px;
+    margin-bottom: 0;
+    margin-left: 3px
+}
+
+.noticeText {
+    margin-bottom: 0;
+    font-size: 12px;
+    position: absolute;
+    left: 3px;
+    right: 3px;
+}
+
+.deletebutt {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    margin-top: 0;
+    border: none!important;
+    padding: none!important;
+    background-color: #000000!important;
+}
+
+#chDiv {
+    width: 100%;
+    position: absolute;
+    top: 130px;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
