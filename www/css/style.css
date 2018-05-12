@@ -307,14 +307,14 @@ body {
 
 #Pawel {
     background-color: #34910d;
-    height: 200px;
+    height: 25%;
     border: 3px solid #000000;
     color: #ffffff;
 }
 
 #Asiam {
-    background-color: #ef098f;
-    height: 200px;
+    background-color: #d13aa7;
+    height: 25%;
     border-top: 1.5px solid #000000;
     border-left: 3px solid #000000;
     border-right: 3px solid #000000;
@@ -324,7 +324,7 @@ body {
 
 #Rudzisz {
     background-color: #c19219;
-    height: 200px;
+    height: 25%;
     border-top: 1.5px solid #000000;
     border-left: 3px solid #000000;
     border-right: 3px solid #000000;
@@ -334,7 +334,7 @@ body {
 
 #Radek {
     background-color: #09c4ef;
-    height: 200px;
+    height: 25%;
     margin-bottom: 40px;
     border-top: 1.5px solid #000000;
     border-left: 3px solid #000000;

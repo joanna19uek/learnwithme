@@ -1,7 +1,7 @@
 function goToSite(id){
-  var anch = document.createElement('a');
-  anch.setAttribute("href", "#"+id);
-  anch.click();
+    var anch = document.createElement('a');
+    anch.setAttribute("href", "#"+id);
+    anch.click();
 }
 
 (function() {
@@ -25,15 +25,16 @@ $(document).ready(function(){
     const btnGLogIn = $("#zalogujG");
     const btnFBLogIn = $("#zalogujFB");
     const btnRegis = $("#zarejestruj");
-    const logout = $("#wyloguj");
     var info = $('#logInfo');
 
     emailInput.on('focus', function(){
 		$(this).css("box-shadow", "none");
 	});
+
     passInput.on('focus', function(){
 		$(this).css("box-shadow", "none");
 	});
+
     //EVENT LISTENER DO LOGOWANIA
     btnLogIn.on('click', function() {
         const email = emailInput.val();
@@ -77,20 +78,14 @@ $(document).ready(function(){
   			}
   			
 		});	
-		promise.then(function(res){
-			//console.log(res);
+		promise.then(function() {
 			getAllAnn();
             info.text("");
             emailInput.val('').off('focus');
     	 	passInput.val('').off('focus');
 		});
 	});
-    /*
-  	//EVENT LISTENER DO PRZEJSCIA DO SERWISU
-	  continueBtn.on('click', function() {
-        getAllAnn();
-    });	  
-	*/
+
     //EVENT LISTENER DO LOGOWANIA PRZEZ GOOGLE
     btnGLogIn.on('click', function() {
         info.html("Próba logowania do Google...");
@@ -150,25 +145,30 @@ $(document).ready(function(){
 		const passwdReg1 = passwdReg1Input.val();
 		const passwdReg2Input = $('#haslopowtreg');
 		const passwdReg2 = passwdReg2Input.val();
+
 		if (nickReg == null || nickReg == "") {
 		    nickReg = emailReg.substring(0, emailReg.indexOf('@'));
 	    }
-	    emailRegInput.on('focus', function(){
-		$(this).css("box-shadow", "none");
+
+	    emailRegInput.on('focus', function() {
+		    $(this).css("box-shadow", "none");
 		});
-		passwdReg1Input.on('focus', function(){
-		$(this).css("box-shadow", "none");
+
+		passwdReg1Input.on('focus', function() {
+		    $(this).css("box-shadow", "none");
 		});
-		passwdReg2Input.on('focus', function(){
-		$(this).css("box-shadow", "none");
+
+		passwdReg2Input.on('focus', function() {
+		    $(this).css("box-shadow", "none");
 		});
+
 		var info = document.getElementById('regInfo');
 		info.style.color = "red";
 		if (passwdReg1 === passwdReg2) {
 			const auth = firebase.auth();
 			const promise = auth.createUserWithEmailAndPassword(emailReg, passwdReg1);
 			promise.catch(e => {
-				switch (e.code){
+				switch (e.code) {
 					case "auth/invalid-email":
 						info.text("Niepoprawny email!");
 						emailRegInput.css("box-shadow", "2px 2px 2px red");
@@ -193,7 +193,7 @@ $(document).ready(function(){
 						break;
 				}
 			});
-			promise.then(function(){
+			promise.then(function() {
 				info.innerText = "";
 				emailRegInput.css("border", "0px solid #ff7777").val("").off('focus');
 				passwdReg1Input.css("border", "0px solid #ff7777").val("").off('focus');
@@ -208,16 +208,6 @@ $(document).ready(function(){
 			passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 		}
 	});
-  
-  function addUserToDB(email, nick, userKey){	
-    var userData = {
-      email: email,
-      name: nick,
-      watched: [],
-      added: []
-    };
-    firebase.database().ref().child('users/' + userKey).set(userData);
-  }
 
     //EVENT LISTENER ZMIANY STATUSU ZALOGOWANIA
     firebase.auth().onAuthStateChanged(firebaseUser => {
@@ -232,114 +222,111 @@ $(document).ready(function(){
             console.log("User not logged in");
         }
     });
-
-
-  /*
-    //EVENT LISTENER DO WYLOGOWANIA
-    logout.addEventListener('click', function(){
-        firebase.auth().signOut()
-            .then(function() {
-                console.log('Signout Succesfull')
-            }, function(error) {
-                console.log('Signout Failed')
-            });
-    });
-    */
 });
 
+function addUserToDB(email, nick, userKey) {
+    var userData = {
+        email: email,
+        name: nick,
+        watched: [],
+        added: []
+    };
+    firebase.database().ref().child('users/' + userKey).set(userData);
+}
+
 function logout(){
-    	firebase.auth().signOut()
-            .then(function() {
-                console.log('Signout Succesfull');
-                goToSite('startPage');
+    firebase.auth().signOut()
+        .then(function() {
+            console.log('Signout Succesfull');
+            goToSite('startPage');
             }, function(error) {
                 console.log('Signout Failed')
-            });
-    }
+            }
+        );
+}
 
 function getChartData() {
-  var database = firebase.database().ref();  
-  var ilosc = [0,0,0,0,0,0,0];
-  var daty = ['','','','','','',''];     
+    var database = firebase.database().ref();
+    var ilosc = [0,0,0,0,0,0,0];
+    var daty = ['','','','','','',''];
     database.child('classifieds/').once("value", function(data) {
-      var newAnn = data.val();
-      for(i = 0; i < 7; i++){ 
-        let today = getYesterdayDate(i);
-        daty[i] = today;
-        for(iter in newAnn){
-          var dat = newAnn[iter].addDate;
-          if(dat == today){
-            ilosc[i] = ilosc[i] + 1;            
-          }          
-        }   
-      }
-      chartClick(ilosc, daty);
+        var newAnn = data.val();
+        for(var i = 0; i < 7; i++) {
+            let today = getYesterdayDate(i);
+            daty[i] = today;
+            for (var iter in newAnn) {
+                var dat = newAnn[iter].addDate;
+                if (dat == today) {
+                    ilosc[i] = ilosc[i] + 1;
+                }
+            }
+        }
+        chartClick(ilosc, daty);
     });
 }
 
-function getYesterdayDate(yesDay){
-  let nowaData = new Date();
-  nowaData.setDate(nowaData.getDate() - yesDay);
-  var dd = nowaData.getDate();
-  var mm = nowaData.getMonth()+1; 
-  var yyyy = nowaData.getFullYear();
-  if(dd<10){
-    dd='0'+dd;
-  } 
-  if(mm<10){
-    mm='0'+mm;
-  } 
-  let propFormat = yyyy + '-' + mm + '-' + dd;
-  return propFormat;
-}
-
-function chartClick(dbData, days){
-  var ctx = document.getElementById("chart").getContext('2d');
-  var il = dbData;
-  var d = days;
-  var myChart = new Chart(ctx, {
-    type: 'horizontalBar',
-    data: {
-        labels: [d[0], d[1], d[2], d[3], d[4], d[5], d[6]],
-        datasets: [{
-            label: 'ilość dodanych ogłoszeń',
-            data: [il[0], il[1], il[2], il[3], il[4], il[5], il[6], 0],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.8)',
-                'rgba(54, 162, 235, 0.8)',
-                'rgba(255, 206, 86, 0.8)',
-                'rgba(75, 192, 192, 0.8)',
-                'rgba(153, 102, 255, 0.8)',
-                'rgba(255, 159, 64, 0.8)',
-                'rgba(123, 232, 157, 0.8)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-                'rgba(123, 232, 157, 1)'
-            ],
-            borderWidth: 2
-        }]
-    },
-    options: {
-      legend: {
-          labels: {
-            boxWidth: 0,
-          }
-        },
-        scales: {
-            yAxes: [{}]
-        }
+function getYesterdayDate(yesDay) {
+    let nowaData = new Date();
+    nowaData.setDate(nowaData.getDate() - yesDay);
+    /*var dd = nowaData.getDate();
+    var mm = nowaData.getMonth()+1;
+    var yyyy = nowaData.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
     }
-  });
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    let propFormat = yyyy + '-' + mm + '-' + dd;*/
+    return formatDate(nowaData);
 }
 
-function sendMail()
-{
+function chartClick(dbData, days) {
+    var ctx = document.getElementById("chart").getContext('2d');
+    var il = dbData;
+    var d = days;
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: [d[0], d[1], d[2], d[3], d[4], d[5], d[6]],
+            datasets: [{
+                label: 'ilość dodanych ogłoszeń',
+                data: [il[0], il[1], il[2], il[3], il[4], il[5], il[6], 0],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(255, 159, 64, 0.8)',
+                    'rgba(123, 232, 157, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)',
+                    'rgba(123, 232, 157, 1)'
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            legend: {
+                labels: {
+                    boxWidth: 0,
+                }
+            },
+            scales: {
+                yAxes: [{}]
+            }
+        }
+    });
+}
+
+function sendMail() {
   var ms = 'Wszelkie problemy i pytania proszę zgłaszać na adres e-mail: <b style="color:#ff0000">pomoc@pomoc.com<b>';
   toast(ms, 3000);
 }

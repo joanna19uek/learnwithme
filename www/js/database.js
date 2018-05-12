@@ -3,11 +3,18 @@ var database = firebase.database().ref();
 var addNewAnn = function() {
     goToSite('addAnnoun');
     $('#tagsNewAnn').val("");
+    $('#tagsNewAnn').off('focus');
     $('#dateNewAnn').val("");
+    $('#dateNewAnn').off('focus');
     $('#startTimeNewAnn').val("");
+    $('#startTimeNewAnn').off('focus');
     $('#endTimeNewAnn').val("");
+    $('#endTimeNewAnn').off('focus');
     $('#placeNewAnn').val("");
+    $('#placeNewAnn').off('focus');
     $('#descriptionAnn').val("");
+    $('#descriptionAnn').off('focus');
+    $('#newAnnInfo').text("");
 };
 
 var addAnnoun = function() {
@@ -17,26 +24,32 @@ var addAnnoun = function() {
 	var endTime = $('#endTimeNewAnn');
 	var placeAnn = $('#placeNewAnn');
 	var description = $('#descriptionAnn');
+
 	tagi.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
+
 	dateAnn.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
+
 	startTime.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
+
 	endTime.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
+
 	placeAnn.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
+
 	description.on('focus', function(){
 		$(this).css("border", "solid 0px transparent");
 	});
-	var dateAdd = formatDate(new Date());
 
+	var dateAdd = formatDate(new Date());
 	var tagiS = tagi.val();
 	var dateAnnS = formatDate(new Date(dateAnn.val()));
 	var startTimeS = startTime.val();
@@ -47,8 +60,7 @@ var addAnnoun = function() {
 	var userID = firebase.auth().currentUser.uid;
 
 	var validateInfo = $('#newAnnInfo').css("color", "red");
-	//console.log(validateTime(startTimeS, endTimeS));
-		//console.log(validateDate(new Date(dateAnn.val()), startTimeS));
+
 	if (tagiS.length == 0 || dateAnnS.length == 0 ||
 		startTimeS.length == 0 || endTimeS.length == 0 || 
 		placeAnnS.length == 0 || descriptionS.length == 0) {
@@ -85,24 +97,12 @@ var addAnnoun = function() {
         var ms = 'Dodano ogłoszenie.';
         toast(ms,600);
 		getMyAnn();
-		tagi.text("");
-		dateAnn.text("");
-		startTime.text("");
-		endTime.text("");
-		placeAnn.text("");
-		description.text("");
-		validateInfo.text("");
-		dateAnn.off('focus');
-		startTime.off('focus');
-		endTime.off('focus');
-		tagi.off('focus');
-		placeAnn.off('focus');
-		description.off('focus');
 	}else {
-		validateInfo.html("Upewnij się czy wprowadzona <strong>data</strong> jest co najmniej dniem dzisiejszym, a godzina <strong>rozpoczęcia</strong> <br>jest wcześniejszą niż <strong>zakończenia</strong> oraz czy już nie <strong>minęła.</strong>")
+		validateInfo.html("Upewnij się czy wprowadzona <strong>data</strong> jest co najmniej dniem dzisiejszym, a godzina <strong>rozpoczęcia</strong> <br>jest wcześniejszą niż <strong>zakończenia</strong> oraz czy już nie <strong>minęła.</strong>");
 		scrollTo(validateInfo);
 	}
 };
+
 function validateTime(sTime, eTime){	
 	sTime = sTime.split(":");
 	sTime = sTime[0]+sTime[1];
@@ -116,6 +116,7 @@ function validateTime(sTime, eTime){
 		return false;
 	}
 }
+
 function validateDate(inputDate, sTime){
 	let cdate = new Date();
 	sTime = sTime.split(":");
@@ -130,21 +131,23 @@ function validateDate(inputDate, sTime){
 		return false;
 	}	
 }
+
 function scrollTo(target){
 	if( target.length ) {
-			event.preventDefault();
-			$('html, body').animate({
-				scrollTop: target.offset().top
-			}, 500);
-		}
+		event.preventDefault();
+		$('html, body').animate({
+			scrollTop: target.offset().top
+		}, 500);
+	}
 }
+
 function formatDate(date) {
     var month = date.getMonth()+1;
     var day = date.getDate();
 
     var output = date.getFullYear() + '-' +
-        ((''+month).length<2 ? '0' : '') + month +
-        '-' + ((''+day).length<2 ? '0' : '') + day;
+        (('' + month).length < 2 ? '0' : '') + month +
+        '-' + (('' + day).length < 2 ? '0' : '') + day;
 
     return output;
 }
@@ -152,7 +155,7 @@ function formatDate(date) {
 function getAllAnn() {
 	var mainCont = $("#mainAll > div[data-role='main']");
 	mainCont.empty();
-	mainCont.append('<p id="comAll">Przykro nam, ale nie ma obecnie dostępnych ogłoszeń :(<br>' +' Dodaj jakieś klikając przycisk + u dołu ekranu!</p>');
+	mainCont.append('<p id="comAll">Przykro nam, ale nie ma obecnie dostępnych ogłoszeń &#x1F61E;<br>' +' Dodaj jakieś klikając przycisk &#x2795; u dołu ekranu!</p>');
 			
 	var usId = firebase.auth().currentUser.uid;
 	var allChilldAdded = database.child('classifieds/');
@@ -160,50 +163,42 @@ function getAllAnn() {
 		var newAnn = data.val();
 		let g = checkAnnMoment(newAnn);				
 		g.sort(sortByDate('dataSort'));		
-		for(iter in g){
-			//console.log(g[iter]);
+		for(var iter in g) {
 			var announInfo = "";
-			if(usId == g[iter].author){
+			if (usId == g[iter].author) {
 				announInfo = "<div class='container'  onclick='showMyAnnoun(\"" + g[iter].key + "\", \"#mainAll\")'><span class='annKey'>" + g[iter].key + "</span><p class='infoAboutMeeting'>" +
 				g[iter].date + " " + g[iter].startTime + "-" + g[iter].endTime + 
 				"<br>" + g[iter].place + "<br>" + g[iter].tags +  
 				"</p><img src='img/greenBook.png' class='bookic'/><p class='undimg'>" + g[iter].followersNumb + "</p></div>";
-			}else if(g[iter].followsBy != null && g[iter].followsBy.hasOwnProperty(usId)){
+			} else if (g[iter].followsBy != null && g[iter].followsBy.hasOwnProperty(usId)) {
 				announInfo = "<div class='container'  onclick='showThisAnnoun(\"" + g[iter].key + "\", \"#mainAll\")'><span class='annKey'>" + g[iter].key + "</span><p class='infoAboutMeeting'>" +
 				g[iter].date + " " + g[iter].startTime + "-" + g[iter].endTime + 
 				"<br>" + g[iter].place + "<br>" + g[iter].tags +  
 				"</p><img src='img/greenBook.png' class='bookic'/><p class='undimg'>" + g[iter].followersNumb + "</p></div>";
-			}else{
+			} else {
 				announInfo = "<div class='container'  onclick='showThisAnnoun(\"" + g[iter].key + "\", \"#mainAll\")'><span class='annKey'>" + g[iter].key + "</span><p class='infoAboutMeeting'>" +
 				g[iter].date + " " + g[iter].startTime + "-" + g[iter].endTime + 
 				"<br>" + g[iter].place + "<br>" + g[iter].tags +  
 				"</p><img src='img/greyBook.png' class='bookic'/><p class='undimg'>" + g[iter].followersNumb + "</p></div>";
 			}
-			
-			if(mainCont.is(':empty')){	
-							
-				mainCont.append(announInfo);
-				$('#comAll').hide();
-			}else{
-					mainCont.append(announInfo);
-				//mainCont.children().first().before(announInfo);			
-				$('#comAll').hide();		
-			}
+
+			mainCont.append(announInfo);
+			$('#comAll').hide();
 		}
 	});	
 	goToSite('mainAll');
 }
 
-function checkAnnMoment(coll){
+function checkAnnMoment(coll) {
 	let today = new Date();
 	let tab = [];
-	for(ins in coll){
+	for (var ins in coll) {
 		let robDate = coll[ins].date.split("-");
 		let eTime = coll[ins].endTime.split(":");
 		let anDate = new Date(robDate[0], robDate[1]-1, robDate[2], eTime[0], eTime[1]);			
-		if(today > anDate){
+		if (today > anDate) {
 			database.child('/classifieds/' + ins).update({active: false});				
-		}else{
+		} else {
 			coll[ins].key = ins;
 			coll[ins].dataSort = coll[ins].date + coll[ins].startTime;
 			tab.push(coll[ins]);
@@ -226,18 +221,17 @@ function sortByDate(property){
 
 function getMyAnn() {
 	var mainContAdd = $("#mainAdd > div[data-role='main']");
-	mainContAdd.empty();	
-	var firstInfo = '<p id="comAdd">Nie dodałeś/dodałaś jeszcze żadnego ogłoszenia.<br> Zmień to klikając przycisk + u dołu ekranu.</p>';	
+	mainContAdd.empty();
+	var firstInfo = '<p id="comAdd">Nie dodałeś/dodałaś jeszcze żadnego ogłoszenia.<br> Zmień to klikając przycisk &#x2795; u dołu ekranu.</p>';
     mainContAdd.append(firstInfo);
-    let tab = [];
     let usId = firebase.auth().currentUser.uid;
     database.child('classifieds/').orderByChild("author").equalTo(usId).once("value", function(data) {		
 		let newAnn = data.val();
 		if (newAnn != null){
 			let g = checkAnnMoment(newAnn);				
 			g.sort(sortByDate('dataSort'));					
-			for(iter in g){									
-				if(g[iter].active){
+			for (var iter in g) {
+				if (g[iter].active) {
 					$('#comAdd').hide();
 					var content = "<div class='container' onclick='showMyAnnoun(\"" + g[iter].key + "\", \"#mainAdd\")'><span class='annKey'>" + g[iter].key + "</span><p class='infoAboutMeeting'>" +
 					g[iter].date + " " + g[iter].startTime + "-" + g[iter].endTime + 
@@ -260,7 +254,7 @@ function getMyWatched() {
 	database.child('users/' + usId + "/watched").once("value", function(data) {		
 		if (data.val() != null) {
 			let objs = {};	
-			for(iter in data.val()){
+			for (var iter in data.val()) {
 				database.child('classifieds/' + iter).once("value").then(function(snapshot) {						
 					objs[snapshot.key] = snapshot.val();
 					if(snapshot.key == Object.keys(data.val())[Object.keys(data.val()).length-1]){
@@ -277,8 +271,8 @@ function addMyWatchAnn(objs){
 	var mainContWatch = $("#mainWatched > div[data-role='main']");
 	let tab = checkAnnMoment(objs);
 	tab.sort(sortByDate('dataSort'));	
-	for(ins in tab){					
-		if(tab[ins].active){
+	for (var ins in tab) {
+		if (tab[ins].active) {
 			$('#comWatched').hide();
 			var contentWat = "<div class='container' onclick='showThisAnnoun(\"" + tab[ins].key + "\", \"#mainWatched\")'><span class='annKey'>" + tab[ins].key + "</span><p class='infoAboutMeeting'>" +
 				tab[ins].date + " " + tab[ins].startTime + "-" + tab[ins].endTime + 
@@ -305,14 +299,14 @@ function showThisAnnoun(key, back){
 	}
 	var annKey = key;
 	var usId = firebase.auth().currentUser.uid;
-	goToSite('annDetailsPage');	
-	//$('#detailBack').attr('href', back);
+	goToSite('annDetailsPage');
 	$('#annKeyDetail').text(annKey);
 	var myWatchKey = [];
 	database.child('classifieds/' + annKey).once("value").then(function(snapshot) {
-		//console.log(snapshot.val());
 		var newAnn = snapshot.val();
-		database.child('users/' + newAnn.author).once("value").then(function(snapshot) {$('#usersAnnDetails').text('Ogłoszenie użytkownika ' + snapshot.val().name);});
+		database.child('users/' + newAnn.author).once("value").then(function(snapshot) {
+			$('#usersAnnDetails').text('Ogłoszenie użytkownika ' + snapshot.val().name);
+		});
 		$('#dateDetails').text(newAnn.date);				
 		$('#startTimeDetails').text(newAnn.startTime);
 		$('#endTimeDetails').text(newAnn.endTime);
@@ -320,11 +314,9 @@ function showThisAnnoun(key, back){
 		$('#descDetails').text(newAnn.description);
 		$('#tagsDetails').text(newAnn.tags);
 		$('#followersNumb').text(newAnn.followersNumb);
-		//database.child('users/' + usId + "/watched/" + key).on('value', function(snap) { myAnn = snap.val(); });
-				
+
 		database.child('users/' + usId + "/watched/" + key).once("value").then(function(snapshot) {
 			myWatchKey = snapshot.val();
-			//console.log(myWatch);		
 			if(myWatchKey != null){
 				$('#imgDetails').attr('src', 'img/greenBook-big.png');
 			}else{
@@ -346,39 +338,30 @@ function toogleWatch(){
 		database.child('/users/' + usId ).once("value").then(function(snapshot) {			
 		userName = snapshot.val().name;
 		});		
-		if(myWatch == null){
+		if (myWatch == null) {
 			database.child('/classifieds/' + newKey + '/followsBy/' + usId).set(usId).then(function() {
-			    //console.log("Remove succeeded.")
 			    database.child('/classifieds/' + newKey + '/followersNumb').transaction(function(currentRank) {
 			    	follNum.text(currentRank + 1);
-				  return currentRank + 1;
+			    	return currentRank + 1;
 				});
 				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {					
 			    	setNofification(snapshot.val().author, 'addToWatch', snapshot.val(), userName);
 				});
-			  })
-			  .catch(function(error) {
-			    //console.log("Remove failed: " + error.message)
-			  });
+			});
 			database.child('/users/' + usId + '/watched/' + newKey).set(newKey);			
 			$('#imgDetails').attr('src', 'img/greenBook-big.png');
 			ms = 'Dodano do obserwowanych.';
 			toast(ms,600);
 		}else{
 			database.child('/classifieds/' + newKey + '/followsBy/' + usId).remove().then(function() {
-			    //console.log("Remove succeeded.")
 			    database.child('/classifieds/' + newKey + '/followersNumb').transaction(function(currentRank) {
 			    	follNum.text(currentRank - 1);
-				  return currentRank - 1;
+			    	return currentRank - 1;
 				});
 				database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
-					//console.log(snapshot.val());
 			    	setNofification(snapshot.val().author, 'removeFromWatch', snapshot.val(), userName);
 				});
-			  })
-			  .catch(function(error) {
-			    //console.log("Remove failed: " + error.message)
-			  });
+			});
 			database.child('/users/' + usId + '/watched/' + newKey).remove();			
 			$('#imgDetails').attr('src', 'img/128greybook.png');
 			ms = 'Usunięto z obserwowanych.';
@@ -402,14 +385,10 @@ function showMyAnnoun(key, back){
 			$('#myDetailBackMy').hide();
 	}
 	var myAnnKey = key;
-	var myId = firebase.auth().currentUser.uid;
 	goToSite('myAnnDetailsPage');
-	
-	//$('#detailBack').attr('href', back);
+
 	$('#myAnnKeyDetail').text(myAnnKey);
-	var myWatchKey = [];
 	database.child('classifieds/' + myAnnKey).once("value").then(function(snapshot) {
-		//console.log(snapshot.val());
 		var myAnnKey = snapshot.val();
 		database.child('users/' + myAnnKey.author).once("value").then(function(snapshot) {$('#usersAnnMyDetails').text('Ogłoszenie użytkownika ' + snapshot.val().name);});
 		$('#dateMyDetails').text(myAnnKey.date);				
@@ -419,45 +398,36 @@ function showMyAnnoun(key, back){
 		$('#descMyDetails').text(myAnnKey.description);
 		$('#tagsMyDetails').text(myAnnKey.tags);
 		$('#myFollowersNumb').text(myAnnKey.followersNumb);
-		//database.child('users/' + usId + "/watched/" + key).on('value', function(snap) { myAnn = snap.val(); });				
 	});
 }
 
 function changeStatus(back){
-	var myId = firebase.auth().currentUser.uid;
 	var newKey = $('#myAnnKeyDetail').text();
 	var ms = 'Odwołano spotkanie.';
 	let authNeme = $('#usersAnnMyDetails').text().split(" ")[2];
 	database.child('/classifieds/' + newKey).update({active: false});
-	/*
-	database.child('/users/' + myId + 'name').once("value").then(function(snapshot) {
-		authNeme.snapshot.val();
-	}
-	*/
 	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
 		console.log(snapshot.val());
-		for(watcher in snapshot.val().followsBy){
-			//console.log(watcher);
+		for(watcher in snapshot.val().followsBy) {
 			setNofification(watcher, 'cancel', snapshot.val(), authNeme);
 		}
-
 	});
 	switch (back){
 		case '#myAnnDetailsPage':
 			showMyAnnoun(newKey);
+			break;
 		default:
-		getMyAnn();
+			getMyAnn();
 	}
 	toast(ms,600);	
 }
-var toast=function(msg, time){
+
+var toast = function(msg, time){
 	$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
-	.css({ display: "block",
-		'background-color': 'rgba(121, 154, 192, 1)', 
+	.css({ display: "block", 'background-color': 'rgba(121, 154, 192, 1)',
 		opacity: 1, 
 		position: "fixed",
-		padding: "7px",
-		"text-align": "center",
+		padding: "7px", "text-align": "center",
 		color: 'rgba(255, 255, 255, 1)',
 		width: "270px",
 		left: ($(window).width() - 284)/2,
@@ -466,33 +436,30 @@ var toast=function(msg, time){
 	.fadeOut( time, function(){
 		$(this).remove();
 	});
-}
+};
 
-function getNotifications(){
-	let usId = firebase.auth().currentUser.uid;
-
+function getNotifications() {
 	var mainContNotice = $("#notice > div[data-role='main']");
 	mainContNotice.empty();
 	
 	database.child('users/' + firebase.auth().currentUser.uid + "/notifications").once("value", function(data) {
-		
 		if (data.val() != null) {
 			var notice = data.val();
 			$('#comNotice').remove();
 			
-			for(iter in notice){
+			for(var iter in notice){
 				var contentNotice = "<div class='noticeContainer'>" + 
 						"<p class='noticeHead'>" + notice[iter].titl + "</p>" + 
 						"<p class='noticeText'>" + notice[iter].infoText + "</p>" +
                     	"<button class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext deletebutt' onclick='removeNotification(\"" + iter + "\", this)'></button>" +
                 		"</div>";	                				
-					if(mainContNotice.is(':empty')){				
-						mainContNotice.append(contentNotice);
-					}else{
-						mainContNotice.children().first().before(contentNotice);					
-					}					
+				if (mainContNotice.is(':empty')) {
+					mainContNotice.append(contentNotice);
+				} else {
+					mainContNotice.children().first().before(contentNotice);
+				}
 			}
-		}else{
+		} else {
 			var firstInfoNotice = '<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>';
 			mainContNotice.append(firstInfoNotice);
 		}
@@ -500,25 +467,22 @@ function getNotifications(){
 	goToSite('notice');
 }
 
-function removeNotification(key, notek){
+function removeNotification(key, notek) {
 	let usId = firebase.auth().currentUser.uid;
 	var notifCont = $(notek).parent().get(0);
 	var mainContNotice = $("#notice > div[data-role='main']");
 	database.child('/users/' + usId + '/notifications/' + key).remove().then(function() {
-			    notifCont.remove();
-			    console.log("Usunięto: " + key);
-			    if(mainContNotice.is(':empty')){
-					mainContNotice.append('<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>');
-				}
-			  })
-			  .catch(function(error) {
-			    console.log("Remove notification failed: " + error.message);
-			  });
-	
+		notifCont.remove();
+		console.log("Usunięto: " + key);
+		if (mainContNotice.is(':empty')) {
+			mainContNotice.append('<p id="comNotice">Obecnie nie masz żadnych powiadomień.</p>');
+		}
+	}).catch(function(error) {
+		console.log("Remove notification failed: " + error.message);
+	});
 }
 
-function setNofification(receiver, reason, announ, author){
-	let usId = firebase.auth().currentUser.uid;	
+function setNofification(receiver, reason, announ, author) {
 	title = '';
 	content = '';
 	switch(reason){
@@ -528,7 +492,7 @@ function setNofification(receiver, reason, announ, author){
 			break;
 		case 'addToWatch':
 			title = 'Dodano obserwację';
-			content = 'Ogłoszenie z dnia <b>' + announ.date + '</b> jest obserwowane przez <b>' + author + '</b>.'
+			content = 'Ogłoszenie z dnia <b>' + announ.date + '</b> jest obserwowane przez <b>' + author + '</b>.';
 			break;
 		case 'removeFromWatch':
 			title = 'Zaprzestano obserwacji';
@@ -541,12 +505,11 @@ function setNofification(receiver, reason, announ, author){
 		default:
 			title: '';
 			content: '';
-
 	}
 	var notiData = {
-			titl: title,
-			infoText: content
-		};
+		titl: title,
+		infoText: content
+	};
 	database.child('users/' + receiver + '/notifications/' ).push().set(notiData);			
 }
 
@@ -566,11 +529,11 @@ function saveProfile() {
     let inpNick = $('#nickprof');
     var newNick = inpNick.val();
     database.child('users/' + userId).update({name: newNick});
-    toast('Nazwa zostałą zmieniona.' ,600);
-    getAllAnn();    
- }
+    toast('Nazwa została zmieniona.' ,600);
+    getAllAnn();
+}
 
- function getAnn(){
+function getAnn() {
 	var newKey = $('#myAnnKeyDetail').text();
 	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
 		var ann = snapshot.val();
@@ -579,12 +542,7 @@ function saveProfile() {
 		$('#endTimeEditAnn').val(ann.endTime);
 		$('#placeEditAnn').val(ann.place);
 		$('#descEditAnn').val(ann.description);
-		//console.log(snapshot);
-		console.log(snapshot.val());
-		var date = ann.date;
-		date = date.split("-");
-		date = date[2]+"-"+date[1]+"-"+date[0];
-		$('#dateEditAnn').val(date);
+		$('#dateEditAnn').val(ann.date);
 	});
 	goToSite('editAnnoun');
 }
@@ -596,11 +554,10 @@ function saveChanges(){
 	database.child('/classifieds/' + newKey).update({place: newPlace, description: newDescription});
 	let authNeme = $('#usersAnnMyDetails').text().split(' ')[2];
 	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {		
-		for(watcher in snapshot.val().followsBy){
+		for(var watcher in snapshot.val().followsBy) {
 			console.log(watcher);
 			setNofification(watcher, 'changeAnnoun', snapshot.val(), authNeme);
 		}
-
 	});
 	var ms = 'Zapisano zmiany.';
 	toast(ms,600);	
