@@ -235,7 +235,7 @@
         <!-- Edit Announcement page -->
         <div data-role="page" id="editAnnoun">
             <div data-role="header" class="header">
-                <a href="#mainAll" class="ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext backbutt"></a>
+                <button  id="myDetailBackButton" class="ui-btn ui-icon-arrow-l ui-btn-icon-left ui-btn-icon-notext backbutt" onclick="goToSite('myAnnDetailsPage')"></button>
                 <h1 id="editAnnHed">Edycja ogłoszenia</h1>
             </div>
           
@@ -257,14 +257,14 @@
                     <input type="text" placeholder="np. Paw. A, piętro 2" id="placeEditAnn"/>
                     <hr>
                     Krótki opis (max. 150 znaków)
-                    <textarea name="descEditAnn" maxlength="150" rows="6" placeholder="Opisz krótko cel spotkania"></textarea> 
+                    <textarea name="descEditAnn" id="descEditAnn" maxlength="150" rows="6" placeholder="Opisz krótko cel spotkania"></textarea> 
                     <hr>
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="footerEditAnn">
-                <button class="ui-btn" id="deleteBtnEditAnn"  onclick="changeStatus('myAnnDetailsPage')">Odwołaj</button> 
+                <button class="ui-btn" id="deleteBtnEditAnn" onclick="changeStatus()">Odwołaj</button> 
                 <button class="ui-btn" id="cancBtnEditAnn" onclick="goToSite('myAnnDetailsPage')">Anuluj</button> 
-                <button class="ui-btn" id="saveBtnEditAnn">Zapisz zmiany</button>
+                <button class="ui-btn" id="saveBtnEditAnn" onclick="saveChanges()">Zapisz zmiany</button> 
             </div>
         </div>
         
@@ -303,17 +303,18 @@
           
             <div data-role="main">
                 <div id="infosMyDetails">
-                    Data: <span id="dateMyDetails"></span><br>
-                    Godziny: <span id="startTimeMyDetails"></span> - <span id="endTimeMyDetails"></span><br>
-                    Miejsce: <span id="placeMyDetails"></span><br>
-                    Opis: <span id="descMyDetails"></span><br>
-                    Tagi: <span id="tagsMyDetails"></span>
+                    <p>Data: <span id="dateMyDetails"></span><br></p>
+                    <p>Godziny: <span id="startTimeMyDetails"></span> - <span id="endTimeMyDetails"></span><br></p>
+                    <p>Miejsce: <span id="placeMyDetails"></span><br></p>
+                    <p>Opis: <span id="descMyDetails"></span><br></p>
+                    <p>Tagi: <span id="tagsMyDetails"></span></p>
+                    <p>Obserwatorzy: <span id="myFollowersNumb"></span></p>
                 </div>
             </div>
 
             <div data-role="footer" data-position="fixed" id="myDetailsFooter">
-                <button class="ui-btn" id="odwolaj"  onclick="changeStatus()">Odwołaj</button>  
-                <button class="ui-btn" id="edytuj" onclick="alert('Cholerka, coś tutaj nie działa! :(')">Edytuj</button>
+                 <button class="ui-btn" id="odwolaj" onclick="changeStatus()">Odwołaj</button>  
+                <button class="ui-btn" id="edytuj" onclick="getAnn()">Edytuj</button> 
             </div>
         </div>
       

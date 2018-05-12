@@ -427,7 +427,7 @@ function changeStatus(back){
 	var myId = firebase.auth().currentUser.uid;
 	var newKey = $('#myAnnKeyDetail').text();
 	var ms = 'Odwołano spotkanie.';
-	let authNeme = $('#usersAnnMyDetails').text();
+	let authNeme = $('#usersAnnMyDetails').text().split(" ")[2];
 	database.child('/classifieds/' + newKey).update({active: false});
 	/*
 	database.child('/users/' + myId + 'name').once("value").then(function(snapshot) {
@@ -437,7 +437,7 @@ function changeStatus(back){
 	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
 		console.log(snapshot.val());
 		for(watcher in snapshot.val().followsBy){
-			console.log(watcher);
+			//console.log(watcher);
 			setNofification(watcher, 'cancel', snapshot.val(), authNeme);
 		}
 
@@ -524,7 +524,7 @@ function setNofification(receiver, reason, announ, author){
 	switch(reason){
 		case 'cancel':
 			title = 'Odwołano spotkanie';
-			content = '<b>' + author + '</b> z dnia <b>' + announ.date + '</b> zostało odwołane.';
+			content = 'Ogłoszenie użytkownika <b>' + author + '</b> z dnia <b>' + announ.date + '</b> zostało odwołane.';
 			break;
 		case 'addToWatch':
 			title = 'Dodano obserwację';
@@ -532,11 +532,11 @@ function setNofification(receiver, reason, announ, author){
 			break;
 		case 'removeFromWatch':
 			title = 'Zaprzestano obserwacji';
-			content = '<b>' + author + '</b> przestał obserwować ogłoszenie z dnia <b>' + announ.date + '</b>.';
+			content = 'Użytkownik <b>' + author + '</b> przestał obserwować ogłoszenie z dnia <b>' + announ.date + '</b>.';
 			break;
 		case 'changeAnnoun':
 			title = 'Zmieniono szczegóły';
-			content = '<b>' + author + '</b> zmienił szczegóły ogłoszenia z dnia <b>' + announ.date + '</b>.';
+			content = 'Użytkownik <b>' + author + '</b> zmienił szczegóły ogłoszenia z dnia <b>' + announ.date + '</b>.';
 			break;
 		default:
 			title: '';
@@ -569,3 +569,40 @@ function saveProfile() {
     toast('Nazwa zostałą zmieniona.' ,600);
     getAllAnn();    
  }
+
+ function getAnn(){
+	var newKey = $('#myAnnKeyDetail').text();
+	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {
+		var ann = snapshot.val();
+		$('#tagsEditAnn').val(ann.tags);
+		$('#startTimeEditAnn').val(ann.startTime);
+		$('#endTimeEditAnn').val(ann.endTime);
+		$('#placeEditAnn').val(ann.place);
+		$('#descEditAnn').val(ann.description);
+		//console.log(snapshot);
+		console.log(snapshot.val());
+		var date = ann.date;
+		date = date.split("-");
+		date = date[2]+"-"+date[1]+"-"+date[0];
+		$('#dateEditAnn').val(date);
+	});
+	goToSite('editAnnoun');
+}
+
+function saveChanges(){
+	var newKey = $('#myAnnKeyDetail').text();
+	var newPlace = $('#placeEditAnn').val();
+	var newDescription = $('#descEditAnn').val();
+	database.child('/classifieds/' + newKey).update({place: newPlace, description: newDescription});
+	let authNeme = $('#usersAnnMyDetails').text().split(' ')[2];
+	database.child('/classifieds/' + newKey).once("value").then(function(snapshot) {		
+		for(watcher in snapshot.val().followsBy){
+			console.log(watcher);
+			setNofification(watcher, 'changeAnnoun', snapshot.val(), authNeme);
+		}
+
+	});
+	var ms = 'Zapisano zmiany.';
+	toast(ms,600);	
+	showMyAnnoun(newKey, back = '#mainAdd');
+}
