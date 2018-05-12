@@ -549,3 +549,23 @@ function setNofification(receiver, reason, announ, author){
 		};
 	database.child('users/' + receiver + '/notifications/' ).push().set(notiData);			
 }
+
+function getProfile() {
+ 	var userId = firebase.auth().currentUser.uid;
+ 	$('#nickprof').val('');
+ 	database.child('users/' + userId).once("value").then(function(snapshot) {
+	    var user = snapshot.val();
+        $('#currentEmail').text(user.email);
+        $('#currentNick').text(user.name);
+ 	});
+ 	goToSite('profileSettingsPage');
+}
+
+function saveProfile() {
+    var userId = firebase.auth().currentUser.uid;
+    let inpNick = $('#nickprof');
+    var newNick = inpNick.val();
+    database.child('users/' + userId).update({name: newNick});
+    toast('Nazwa zostałą zmieniona.' ,600);
+    getAllAnn();    
+ }
