@@ -217,6 +217,8 @@ $(document).ready(function(){
                     addUserToDB(firebaseUser.email, firebaseUser.displayName, firebaseUser.uid);
                 }
             });
+            checkNotify(firebaseUser.uid);
+            console.log(firebaseUser.uid);
             getAllAnn();
         } else {
             console.log("User not logged in");
@@ -329,4 +331,16 @@ function chartClick(dbData, days) {
 function sendMail() {
   var ms = 'Wszelkie problemy i pytania proszę zgłaszać na adres e-mail: <b style="color:#ff0000">pomoc@pomoc.com<b>';
   toast(ms, 3000);
+}
+
+function checkNotify(userID){
+	database.child('users/' + userID + '/notifications/').on('value', function(snap) {
+		let menu1 = $(" div[data-role='panel'] > div > ul > :first-child > :first-child ");
+        if (snap.val() == null) {        	
+        	menu1.removeClass('notifyStar');
+        }else{        	
+        	menu1.addClass('notifyStar');
+        	toast("Masz powiadomienia!", 1000);
+        }
+    });
 }
