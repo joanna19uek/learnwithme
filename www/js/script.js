@@ -48,22 +48,22 @@ $(document).ready(function(){
             //console.log(e.code);
   		    switch (e.code){
             case "auth/invalid-email":
-              info.text("Niepoprawny email!");
+              info.html("Niepoprawny email!");
               emailInput.css("box-shadow", "2px 2px 2px red");  					
               console.log(e.code);
               break;
             case "auth/user-not-found":
-              info.text("Niepoprawny email!");
+              info.html("Niepoprawny email!");
               emailInput.css("box-shadow", "2px 2px 2px red");  					
               console.log(e.code);
               break;  				
             case "auth/email-already-in-use":
-              info.text("Email jest już w użyciu!");
+              info.html("Email jest już w użyciu!");
               emailInput.css("box-shadow", "2px 2px 2px red");  
               console.log(e.code);
               break;
             case "auth/wrong-password":
-              info.text("Niepoprawne hasło!");
+              info.html("Niepoprawne hasło!");
               passInput.css("box-shadow", "2px 2px 2px red");
               console.log(e.code);
               break;
@@ -72,7 +72,7 @@ $(document).ready(function(){
               
               break;
             default:
-    		  info.text("Nieokreślony błąd.");
+    		  info.html("Nieokreślony błąd.");
     		  console.log(e.code);
     		  break;
   			}
@@ -80,7 +80,7 @@ $(document).ready(function(){
 		});	
 		promise.then(function() {
 			getAllAnn();
-            info.text("");
+            info.html("");
             emailInput.val('').off('focus');
     	 	passInput.val('').off('focus');
 		});
@@ -162,39 +162,39 @@ $(document).ready(function(){
 		    $(this).css("box-shadow", "none");
 		});
 
-		var info = document.getElementById('regInfo');
-		info.style.color = "red";
+		var info = $('#regInfo');
+        info.css("color", "red");
 		if (passwdReg1 === passwdReg2) {
 			const auth = firebase.auth();
 			const promise = auth.createUserWithEmailAndPassword(emailReg, passwdReg1);
 			promise.catch(e => {
 				switch (e.code) {
 					case "auth/invalid-email":
-						info.text("Niepoprawny email!");
+						info.html("Niepoprawny email!");
 						emailRegInput.css("box-shadow", "2px 2px 2px red");
 						console.log(e.code);
 						break;
 					case "auth/weak-password":
-						info.text("Hasło musi zawierać co najlniej 6 znaków!");
+						info.html("Hasło musi zawierać co najlniej 6 znaków!");
 						passwdReg1Input.css("box-shadow", "2px 2px 2px red");
 						passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 						console.log(e.code);
 						break;
 					case "auth/email-already-in-use":
-						info.text("Email jest już w użyciu!");
+						info.html("Email jest już w użyciu!");
 						emailRegInput.css("box-shadow", "2px 2px 2px red");
 						passwdReg1Input.css("box-shadow", "2px 2px 2px red");
 						passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 						console.log(e.code);
 						break;
 					default:
-						info.text("Nieokreślony błąd.");
+						info.html("Nieokreślony błąd.");
 						console.log(e.code);
 						break;
 				}
 			});
 			promise.then(function() {
-				info.innerText = "";
+				info.html("");
 				emailRegInput.css("border", "0px solid #ff7777").val("").off('focus');
 				passwdReg1Input.css("border", "0px solid #ff7777").val("").off('focus');
 				passwdReg2Input.css("border", "0px solid #ff7777").val("").off('focus');
@@ -203,7 +203,7 @@ $(document).ready(function(){
 			});
 		} else {
 			console.log("Hasła są niepoprawne");
-			info.text("Hasła nie są identyczne!");
+			info.html("Hasła nie są identyczne!");
 			passwdReg1Input.css("box-shadow", "2px 2px 2px red");
 			passwdReg2Input.css("box-shadow", "2px 2px 2px red");
 		}
@@ -268,16 +268,6 @@ function getChartData() {
 function getYesterdayDate(yesDay) {
     let nowaData = new Date();
     nowaData.setDate(nowaData.getDate() - yesDay);
-    /*var dd = nowaData.getDate();
-    var mm = nowaData.getMonth()+1;
-    var yyyy = nowaData.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    let propFormat = yyyy + '-' + mm + '-' + dd;*/
     return formatDate(nowaData);
 }
 
@@ -324,9 +314,22 @@ function chartClick(dbData, days) {
             }
         }
     });
+    goToSite('chartPage');
 }
 
-function sendMail() {
-  var ms = 'Wszelkie problemy i pytania proszę zgłaszać na adres e-mail: <b style="color:#ff0000">pomoc@pomoc.com<b>';
-  toast(ms, 3000);
+function sendEmail() {
+    cordova.plugins.email.isAvailable(
+        function (isAvailable) {
+            if (isAvailable) {
+                cordova.plugins.email.open({
+                    to:      ['asia_p99@tlen.pl', 'rsmyksy@gmail.com', 'lukasz.pudzisz@gmail.com', 'p.grzyb1995@gmail.com'],
+                    subject: 'LearnWithMe - wsparcie',
+                    body:    'Chciałbym zgłosić następujące błędy:\n'
+                });
+            } else {
+                var ms = 'Brak skonfigurowanej poczty e-mail.';
+                toast(ms, 3000);
+            }
+        }
+    );
 }
