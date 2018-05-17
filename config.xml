@@ -1,48 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<widget xmlns   = "http://www.w3.org/ns/widgets"
-        xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "learnwithme98129.firebaseapp.com"
-        version     = "1.0.0" >
-
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="learnwithme98129.firebaseapp.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>LearnWithMe</name>
     <description>Aplikacja do organizowania wspólnej nauki</description>
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
-    <allow-navigation href="http://*/*" />
-    <allow-navigation href="https://*/*" />
-
-    <allow-intent href="*" />
-    <allow-navigation href="*" />
-
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
     <platform name="android">
-        <icon src="www/img/logo.png"/>
+        <allow-intent href="market:*" />
+        <icon src="www/img/logo.png" />
     </platform>
-    
     <universal-links>
         <host name="gz65b.app.goo.gl" scheme="https" />
         <host name="learnwithme-98129.firebaseapp.com" scheme="https">
-            <path url="/__/auth/callback"/>
+            <path url="/__/auth/callback" />
         </host>
     </universal-links>
-
-    
-    <plugin name="cordova-plugin-device" spec="1.1.4" />
-    <plugin name="cordova-plugin-buildinfo" spec="2.0.1" />
-    <plugin name="cordova-universal-links-plugin" spec="~1.2.1" />
-    <plugin name="cordova-plugin-browsertab" spec="0.2.0" />
-    
-    
     <preference name="AndroidLaunchMode" value="singleTask" />
-    
-    <plugin name="cordova-plugin-console" spec="~1.0.3" />
-    <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
-    <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
-        <variable name="APP_ID" value="APP_ID" />
-        <variable name="APP_NAME" value="APP_NAME" />
-    </plugin>
-    <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
-    
-    
-
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-device" spec="~2.0.2" />
+    <plugin name="cordova-plugin-buildinfo" spec="~2.0.1" />
+    <plugin name="cordova-universal-links-plugin" spec="~1.2.1" />
+    <plugin name="cordova-plugin-browsertab" spec="~0.2.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="~3.0.0" />
+    <plugin name="cordova-plugin-email" spec="^1.2.7" />
+    <engine name="android" spec="^7.0.0" />
 </widget>
