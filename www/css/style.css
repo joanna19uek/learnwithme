@@ -110,13 +110,16 @@ body {
 }
 #aftRegCom > h2 {
 	text-align:center;
+    margin-top: 50%;
+    margin-right: 30px;
 }
 #downArrow {
-	width:30%;
-	margin-top: 80px;
+	width:60%;
+	margin-top: 60px;
 	display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
 
 #przejdzDoSerwisu {
