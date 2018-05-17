@@ -339,8 +339,12 @@ function checkNotify(userID){
         if (snap.val() == null) {        	
         	menu1.removeClass('notifyStar');
         }else{        	
-        	menu1.addClass('notifyStar');
-        	toast("Masz powiadomienia!", 1000);
+        	menu1.addClass('notifyStar');        	
         }
     });
+    database.child('users/' + userID + '/notifications/').once('value', function(snap) {		
+        if (snap.val() != null) { 
+        	toast("Masz nieusunięte powiadomienia!", 1000);
+        }
+	});
 }
