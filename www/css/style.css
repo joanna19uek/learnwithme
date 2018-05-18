@@ -502,3 +502,23 @@ body {
 .ident {
    margin-left: 30px;
  }
+
+.notifyStar{
+   position: relative;
+   left: -15px;
+   text-shadow: 2px 2px 2px red !important;
+}
+
+.notifyStar::before {
+  content: '\2605';  
+  color: red;
+  position: relative;
+  text-shadow: 0px 0px 0px transparent;
+  left: 128px;
+  bottom: 6px;
+}
+.notifyStar::after {
+    content: '';
+    position: absolute;
+    left: 1.4em;
+}
