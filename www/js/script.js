@@ -87,7 +87,7 @@ $(document).ready(function(){
 
     //EVENT LISTENER DO LOGOWANIA PRZEZ GOOGLE
     btnGLogIn.on('click', function() {
-        info.html("Próba logowania do Google...");
+        //info.html("Próba logowania do Google...");
         var provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().useDeviceLanguage();
         firebase.auth().signInWithRedirect(provider);
@@ -112,7 +112,7 @@ $(document).ready(function(){
 
     //EVENT LISTENER DO LOGOWANIA PRZEZ FB
     btnFBLogIn.on('click', function() {
-        info.html("Próba logowania do FB...");
+        //info.html("Próba logowania do FB...");
         var provider = new firebase.auth.FacebookAuthProvider();
         firebase.auth().useDeviceLanguage();
         firebase.auth().signInWithRedirect(provider);
