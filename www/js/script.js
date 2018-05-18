@@ -78,8 +78,7 @@ $(document).ready(function(){
   			}
   			
 		});	
-		promise.then(function() {
-			getAllAnn();
+		promise.then(function() {			
             info.html("");
             emailInput.val('').off('focus');
     	 	passInput.val('').off('focus');
@@ -217,8 +216,7 @@ $(document).ready(function(){
                     addUserToDB(firebaseUser.email, firebaseUser.displayName, firebaseUser.uid);
                 }
             });
-            checkNotify(firebaseUser.uid);
-            console.log(firebaseUser.uid);
+            checkNotify(firebaseUser.uid);            
             getAllAnn();
         } else {
             console.log("User not logged in");
@@ -339,15 +337,15 @@ function sendEmail() {
 function checkNotify(userID){
 	database.child('users/' + userID + '/notifications/').on('value', function(snap) {
 		let menu1 = $(" div[data-role='panel'] > div > ul > :first-child > :first-child ");
-    if (snap.val() == null) {        	
-      menu1.removeClass('notifyStar');
-    }else{        	
-      menu1.addClass('notifyStar');        	
-    }
-  });
-  database.child('users/' + userID + '/notifications/').once('value', function(snap) {		
-    if (snap.val() != null) { 
-      toast("Masz nieusunięte powiadomienia!", 1000);
-    }
+	    if (snap.val() == null) {        	
+	      menu1.removeClass('notifyStar');
+	    }else{        	
+	      menu1.addClass('notifyStar');        	
+	    }
+  	});
+  	database.child('users/' + userID + '/notifications/').once('value', function(snap) {		
+	    if (snap.val() != null) { 
+	      toast("Masz nieusunięte powiadomienia!", 1000);
+	    }
 	});
 }
