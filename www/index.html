@@ -45,7 +45,7 @@
                 <br>
                 <p align="center">LUB</p>
                 <br>
-                <button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-fbicon" id="zalogujFB" onclick="fbLogin()">Zaloguj przez Facebook</button>
+                <button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-fbicon" id="zalogujFB">Zaloguj przez Facebook</button>
                 <button class="ui-btn ui-corner-all ui-btn-icon-left ui-icon-gicon" id="zalogujG">Zaloguj przez Google</button>           
             </div>
         </div>
@@ -68,7 +68,7 @@
             </div>
 
             <div data-role="footer" data-position="fixed">
-                <button class="ui-btn ui-corner-all" id="zarejestruj" onclick="goToSite('afterRegPage')">Zarejestruj</button>                
+                <button class="ui-btn ui-corner-all" id="zarejestruj">Zarejestruj</button>
             </div>
         </div>
       
@@ -107,7 +107,7 @@
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
@@ -128,7 +128,7 @@
         <!-- Main page - added -->
         <div data-role="page" id="mainAdd">
             <div data-role="header" class="header">
-                <a href="#sideMenu1" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn" data-role="button" role="button"></a>
+                <a href="#sideMenu1" class="ui-btn ui-corner-all ui-icon-bars ui-btn-icon-notext menubtn" data-role="button" role="button"><div class="notifyStar">*</div></a>
                 <h1 id="mainAddHeader">LearnWithMe</h1>
                 <div data-role="controlgroup" id="controlBtnsAd" class="btn-group">
                   <button class="ui-btn" id="allAd" onclick="getAllAnn()">Ogłoszenia</button>
@@ -142,7 +142,7 @@
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
@@ -177,7 +177,7 @@
                     <p style="margin-top: -20px; margin-left: 70px">Meeting platform</p>
                     <ul style="list-style: none; transform: translateX(-40px);">
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-alerts ui-btn-icon-left sideMenuButton" onclick="getNotifications()">Powiadomienia</button></li>
-                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="goToSite('chartPage');getChartData()">Statystyki</button></li>
+                        <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-statistics ui-btn-icon-left sideMenuButton" onclick="getChartData()">Statystyki</button></li>
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-authors ui-btn-icon-left sideMenuButton" onclick="goToSite('authors')">Autorzy</button></li>
                         <hr />
                         <li><button class="ui-btn ui-corner-all ui-btn-inline ui-btn-mini ui-icon-editUser ui-btn-icon-left sideMenuButton" onclick="getProfile()">Edytuj Profil</button></li>
@@ -349,7 +349,7 @@
                 </div>
             </div>
             <div data-role="footer" data-position="fixed" id="kontaktFooter">
-                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="sendMail()">Kontakt</button>                
+                <button class="ui-btn ui-corner-all" id="kontaktBtn" onclick="sendEmail()">Kontakt</button>
             </div>
         </div>
 
